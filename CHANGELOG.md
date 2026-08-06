@@ -24,6 +24,12 @@
 - Live at: https://eco360-webpage.vercel.app
 - DNS eco360.ai not yet pointed here — Wix still active
 
+**Tests (35 Vitest)**
+- `tests/html.test.js` (12): DOCTYPE, lang, viewport, OG tags, `<main>`, heading order, html-validate errors
+- `tests/headers.test.js` (9): CSP, HSTS, X-Frame-Options, Referrer-Policy, Permissions-Policy
+- `tests/redirects.test.js` (14): kaikki Wix-era 308-ohjaukset + root 200
+- HTML validity fixes: 7× raaka `&` → `&amp;`, `<button type="button">`
+
 **Pending before DNS migration (Phase 2)**
 - UNVERIFIED CLAIMS comments in `index.html` to be reviewed by Jyri
 - Safari + Firefox cross-browser testing
