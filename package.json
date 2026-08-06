@@ -1,0 +1,12 @@
+{
+  "name": "eco360-webpage",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^2.0.0",
+    "html-validate": "^9.0.0"
+  }
+}
