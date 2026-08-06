@@ -1,0 +1,54 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Content-Security-Policy",
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.eco360.ai; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:"
+        },
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "camera=(), microphone=(), geolocation=()"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=63072000; includeSubDomains; preload"
+        }
+      ]
+    }
+  ],
+  "redirects": [
+    { "source": "/platform",          "destination": "/#platform",  "permanent": true },
+    { "source": "/solutions",         "destination": "/#solutions", "permanent": true },
+    { "source": "/about",             "destination": "/#team",      "permanent": true },
+    { "source": "/about-us",          "destination": "/#team",      "permanent": true },
+    { "source": "/contact",           "destination": "/#contact",   "permanent": true },
+    { "source": "/contact-us",        "destination": "/#contact",   "permanent": true },
+    { "source": "/pricing",           "destination": "/#pricing",   "permanent": true },
+    { "source": "/co2-tools",         "destination": "/#device-search", "permanent": true },
+    { "source": "/co2tools",          "destination": "/#device-search", "permanent": true },
+    { "source": "/blog",              "destination": "/",           "permanent": true },
+    { "source": "/blog/:path*",       "destination": "/",           "permanent": true },
+    { "source": "/post/:path*",       "destination": "/",           "permanent": true },
+    { "source": "/home",              "destination": "/",           "permanent": true }
+  ]
+}

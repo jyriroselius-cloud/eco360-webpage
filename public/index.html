@@ -1,0 +1,1196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ECO360 — The compliance & carbon data layer for physical products</title>
+<meta name="description" content="Product-level CO₂ and compliance data with a confidence tier and a source on every number. Cut EU reporting costs by up to 90%. Deepest in electronics.">
+<link rel="canonical" href="https://eco360.ai/">
+<meta name="theme-color" content="#06090D">
+<meta name="robots" content="index,follow">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="ECO360">
+<meta property="og:title" content="ECO360 — Every number carries its proof">
+<meta property="og:description" content="The compliance and carbon data layer for physical products. Product-level CO₂, substance screening and digital product passports — with a confidence tier and a source on every figure.">
+<meta property="og:url" content="https://eco360.ai/">
+<meta property="og:image" content="https://eco360.ai/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ECO360 — Every number carries its proof">
+<meta name="twitter:description" content="Product-level CO₂ and compliance data with a confidence tier and a source on every number. Cut EU reporting costs by up to 90%.">
+<meta name="twitter:image" content="https://eco360.ai/og-image.png">
+
+<!-- Favicon (inline; replace with /favicon.svg + PNG set in repo if preferred) -->
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2306090D'/%3E%3Cpath d='M8 20a6 6 0 0 1 1.6-11.7A7 7 0 0 1 23 10a5.5 5.5 0 0 1-1 10.9H10A6 6 0 0 1 8 20z' fill='none' stroke='%235BD469' stroke-width='2.4' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<!-- Structured data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://eco360.ai/#org",
+      "name": "ECO360",
+      "legalName": "EcoGreen360 Oy",
+      "url": "https://eco360.ai/",
+      "logo": "https://eco360.ai/og-image.png",
+      "email": "hello@eco360.ai",
+      "address": { "@type": "PostalAddress", "addressCountry": "FI" },
+      "sameAs": []
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://eco360.ai/#site",
+      "url": "https://eco360.ai/",
+      "name": "ECO360",
+      "publisher": { "@id": "https://eco360.ai/#org" },
+      "inLanguage": "en"
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "ECO360 Platform",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "Web",
+      "url": "https://eco360.ai/",
+      "description": "The compliance and carbon data layer for physical products: model-level device CO₂ data, BoM substance screening, digital product passports and GHG Scope 1/2/3 reporting — every figure with a confidence tier and a source.",
+      "offers": [
+        { "@type": "Offer", "name": "Starter", "price": "5700", "priceCurrency": "EUR" },
+        { "@type": "Offer", "name": "Growth", "price": "9120", "priceCurrency": "EUR" },
+        { "@type": "Offer", "name": "Professional", "price": "14820", "priceCurrency": "EUR" }
+      ],
+      "provider": { "@id": "https://eco360.ai/#org" }
+    }
+  ]
+}
+</script>
+<!-- ============================================================
+     ECO360 marketing site — single-file prototype v1
+     Author: design prototype for Jorma to productionise.
+     See: 06 Development/ECO360 Platform/Kotisivut-toteutusohje-Jorma.md
+     ============================================================ -->
+<style>
+:root{
+  --black:#06090D; --deep:#0A111A; --panel:#101B27; --panel2:#0D1620; --line:#1D2B3A;
+  --green:#5BD469; --green2:#8CE05F; --green-d:#2FA84F; --glow:rgba(91,212,105,.5);
+  --teal:#49D3BE; --teal-d:#2BA593; --tglow:rgba(73,211,190,.45);
+  --white:#F2F7FA; --dim:#8FA3B8; --dim2:#5E7186;
+  --ok:#5BD469; --warn:#E8C35A; --serious:#E8875A; --crit:#E85A6A;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--black);color:var(--white);overflow-x:hidden;
+  font:400 17px/1.65 "Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased}
+.wrap{max-width:1280px;margin:0 auto;padding:0 44px;position:relative;z-index:2}
+a{color:inherit;text-decoration:none}
+h1,h2,h3{letter-spacing:-.035em;line-height:1.04;font-weight:700}
+h1{font-size:clamp(42px,5.4vw,78px)}
+h2{font-size:clamp(34px,4.8vw,68px)}
+h3{font-size:21px;line-height:1.25;letter-spacing:-.02em;font-weight:650}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--green)}
+.eyebrow.t{color:var(--teal)}
+.lede{font-size:clamp(17px,1.4vw,20px);line-height:1.65;color:var(--dim);max-width:60ch}
+.gr{background:linear-gradient(92deg,var(--green2),var(--teal));-webkit-background-clip:text;background-clip:text;color:transparent}
+.tl{color:var(--teal)}
+section{padding:120px 0;position:relative}
+.sechead{margin-bottom:56px}
+.sechead .lede{margin-top:18px}
+small.src{display:block;font-size:12px;color:var(--dim2);margin-top:10px}
+
+/* ---------------- nav ---------------- */
+nav{position:fixed;inset:0 0 auto 0;z-index:100;height:74px;
+  background:rgba(6,9,13,.72);backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);
+  border-bottom:1px solid rgba(255,255,255,.06)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;height:100%}
+nav img{height:30px;display:block}
+.nlinks{display:flex;gap:34px;align-items:center;font-size:14.5px;color:var(--dim)}
+.nlinks a:hover{color:var(--white)}
+.ncta{background:linear-gradient(92deg,var(--green),var(--teal-d));color:#04220D;font-weight:650;
+  padding:11px 22px;border-radius:100px;font-size:14.5px;transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.ncta:hover{transform:translateY(-2px);box-shadow:0 8px 30px var(--glow);color:#04220D}
+@media(max-width:900px){.nlinks a:not(.ncta){display:none}}
+
+/* ---------------- buttons ---------------- */
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 30px;border-radius:100px;
+  font-weight:650;font-size:16px;transition:transform .35s var(--ease),box-shadow .35s var(--ease);cursor:pointer;border:0}
+.btn.primary{background:linear-gradient(92deg,var(--green),var(--teal-d));color:#04220D}
+.btn.primary:hover{transform:translateY(-3px);box-shadow:0 12px 40px var(--glow)}
+.btn.ghost{border:1px solid var(--line);color:var(--white);background:transparent}
+.btn.ghost:hover{border-color:var(--green);transform:translateY(-3px)}
+
+/* ---------------- hero ---------------- */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:150px 0 90px;overflow:hidden}
+#hero .wrap.hero-main{display:grid;grid-template-columns:1.15fr .85fr;gap:60px;align-items:center}
+.hero-bg{position:absolute;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.hero-bg .orb{position:absolute;border-radius:50%;filter:blur(110px);opacity:.35}
+.orb.g{width:640px;height:640px;background:radial-gradient(circle,var(--green-d),transparent 65%);top:-160px;left:-140px;animation:drift 16s var(--ease) infinite alternate}
+.orb.t{width:520px;height:520px;background:radial-gradient(circle,var(--teal-d),transparent 65%);bottom:-140px;right:-100px;animation:drift 19s var(--ease) infinite alternate-reverse}
+@keyframes drift{from{transform:translate(0,0)}to{transform:translate(60px,40px)}}
+.grid-lines{position:absolute;inset:0;background:
+  linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+  background-size:56px 56px;mask-image:radial-gradient(ellipse 90% 70% at 50% 40%,#000 30%,transparent 75%);
+  -webkit-mask-image:radial-gradient(ellipse 90% 70% at 50% 40%,#000 30%,transparent 75%)}
+#hero h1{margin:22px 0 26px}
+.hero-ctas{display:flex;gap:18px;margin-top:38px;flex-wrap:wrap}
+.hero-note{font-size:13px;color:var(--dim2);margin-top:18px}
+
+/* stats band */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);
+  border:1px solid var(--line);border-radius:18px;overflow:hidden;margin-top:80px}
+.stat{background:var(--deep);padding:28px 26px}
+.stat b{display:block;font-size:clamp(26px,2.4vw,38px);letter-spacing:-.03em;font-weight:700}
+.stat span{font-size:13.5px;color:var(--dim)}
+@media(max-width:900px){.stats{grid-template-columns:repeat(2,1fr)}}
+
+/* ---------------- 3D layer stack ---------------- */
+.stack-scene{perspective:1200px;display:flex;justify-content:center;align-items:center;min-height:460px;position:relative}
+.stack{margin-right:170px;transform-style:preserve-3d;transform:rotateX(58deg) rotateZ(-42deg);position:relative;width:300px;height:300px;animation:stackfloat 7s var(--ease) infinite alternate}
+@keyframes stackfloat{from{transform:rotateX(58deg) rotateZ(-42deg) translateZ(0)}to{transform:rotateX(55deg) rotateZ(-38deg) translateZ(18px)}}
+.layer{position:absolute;inset:0;border-radius:20px;border:1px solid;
+  backdrop-filter:blur(2px);transition:transform .5s var(--ease)}
+.stackkey{list-style:none;position:absolute;right:6%;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:13px;
+  font-size:12px;font-weight:650;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+.stackkey i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:10px;vertical-align:-1px}
+.stackkey .k1 i{background:#22374B}.stackkey .k2 i{background:#2C5B50}.stackkey .k3 i{background:#2F6B44}
+.stackkey .k4 i{background:#3B8A52}.stackkey .k5 i{background:#49AD60}.stackkey .k6 i{background:var(--green);box-shadow:0 0 10px var(--glow)}
+@media(max-width:1200px){.stackkey{display:none}}
+.stack:hover .layer{transform:translateZ(calc(var(--z) * 1.35))}
+.layer{transform:translateZ(var(--z))}
+.l1{--z:0px;background:rgba(16,27,39,.9);border-color:#22374B;color:var(--dim)}
+.l2{--z:44px;background:rgba(23,46,44,.82);border-color:#2C5B50;color:#9BE8D8}
+.l3{--z:88px;background:rgba(24,52,36,.78);border-color:#2F6B44;color:#A9E9B4}
+.l4{--z:132px;background:rgba(30,63,40,.74);border-color:#3B8A52;color:#BFF0C6}
+.l5{--z:176px;background:rgba(38,76,46,.7);border-color:#49AD60;color:#D6F7DA}
+.l6{--z:220px;background:rgba(47,92,52,.68);border-color:var(--green);color:#EBFDED;box-shadow:0 0 60px var(--glow)}
+.stack-caption{text-align:center;font-size:13px;color:var(--dim2);margin-top:26px}
+@media(max-width:1000px){#hero .wrap.hero-main{grid-template-columns:1fr}.stack-scene{min-height:380px}.stack{margin-right:0}}
+@media(max-width:600px){.stack{width:210px;height:210px}.layer{border-radius:14px}.stack-scene{min-height:330px}}
+
+/* ---------------- EmpCo countdown ---------------- */
+#empco{padding:0}
+.empco-band{border-block:1px solid var(--line);background:linear-gradient(180deg,var(--deep),var(--black));padding:64px 0}
+.empco-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:center}
+.count{display:flex;gap:14px}
+.count .cell{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 8px;text-align:center;flex:1;min-width:86px}
+.count b{display:block;font-size:clamp(30px,3.4vw,52px);font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.count span{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim2)}
+.empco-date{font-size:13px;color:var(--dim2);margin-top:14px}
+@media(max-width:900px){.empco-grid{grid-template-columns:1fr}}
+
+/* ---------------- problem ---------------- */
+.pains{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin-top:54px}
+.pain{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:30px 26px;transition:transform .4s var(--ease),border-color .4s var(--ease)}
+.pain:hover{transform:translateY(-6px);border-color:#2C4257}
+.pain .ico{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:18px;
+  background:rgba(232,90,106,.12);color:var(--crit);font-size:20px}
+.pain h3{margin-bottom:8px;font-size:17.5px}
+.pain p{font-size:14.5px;color:var(--dim)}
+.bigcost{margin-top:70px;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.costcol{background:var(--deep);padding:44px}
+.costcol.after{background:linear-gradient(160deg,#0D1B14,#0A141C)}
+.costcol .tag{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--dim2);margin-bottom:14px;display:block}
+.costcol b{font-size:clamp(34px,3.6vw,54px);letter-spacing:-.03em;display:block;line-height:1}
+.costcol.after b{color:var(--green)}
+.costcol p{color:var(--dim);font-size:15px;margin-top:14px}
+@media(max-width:1000px){.pains{grid-template-columns:repeat(2,1fr)}.bigcost{grid-template-columns:1fr}}
+@media(max-width:600px){.pains{grid-template-columns:1fr}}
+/* ---------------- lookup demo ---------------- */
+#lookup .panel{background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:46px;margin-top:10px}
+.lk-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:46px}
+.lk-search{display:flex;gap:12px;margin-top:22px}
+.lk-search select{flex:1;background:var(--panel2);border:1px solid var(--line);border-radius:14px;color:var(--white);
+  padding:15px 18px;font-size:15.5px;appearance:none;outline:none}
+.lk-search select:focus{border-color:var(--green)}
+.lk-search .btn{padding:14px 26px}
+.demochips{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.chip{font-size:12.5px;border:1px solid var(--line);color:var(--dim);border-radius:100px;padding:7px 14px;cursor:pointer;transition:all .3s var(--ease)}
+.chip:hover{border-color:var(--teal);color:var(--white)}
+.demonote{font-size:12px;color:var(--dim2);margin-top:18px}
+.dcard{background:var(--panel2);border:1px solid var(--line);border-radius:20px;padding:34px;min-height:380px;position:relative;overflow:hidden}
+.dcard .dmodel{font-size:22px;font-weight:700;letter-spacing:-.02em}
+.dcard .dconf{font-size:13.5px;color:var(--dim);margin-top:2px}
+.dtotal{margin:26px 0 6px;display:flex;align-items:baseline;gap:10px}
+.dtotal b{font-size:clamp(40px,4vw,60px);letter-spacing:-.04em;line-height:1}
+.dtotal span{color:var(--dim);font-size:15px}
+.drows{margin-top:22px;display:flex;flex-direction:column;gap:0}
+.drow{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line);font-size:14.5px}
+.drow .ph{color:var(--dim)}
+.drow .val{font-variant-numeric:tabular-nums;font-weight:650;text-align:right;min-width:74px}
+.tier{font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;border-radius:6px;padding:4px 8px;border:1px solid}
+.tier.meas{color:var(--green);border-color:rgba(91,212,105,.4);background:rgba(91,212,105,.08)}
+.tier.der{color:var(--teal);border-color:rgba(73,211,190,.4);background:rgba(73,211,190,.08)}
+.tier.est{color:var(--warn);border-color:rgba(232,195,90,.4);background:rgba(232,195,90,.08)}
+.dsource{font-size:12px;color:var(--dim2);margin-top:20px;line-height:1.6}
+.dsource a{color:var(--teal);border-bottom:1px dotted var(--teal-d)}
+.dbar{height:10px;border-radius:6px;background:var(--line);margin-top:24px;overflow:hidden;display:flex}
+.dbar i{height:100%;display:block;transition:width 1s var(--ease)}
+.dbar .m{background:var(--green)}.dbar .t{background:var(--teal)}.dbar .u{background:#7FB6E0}.dbar .e{background:#5E7186}
+.dlegend{display:flex;gap:18px;font-size:12px;color:var(--dim2);margin-top:12px;flex-wrap:wrap}
+.dlegend i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px}
+@media(max-width:1000px){.lk-grid{grid-template-columns:1fr}}
+
+/* ---------------- tiers / cascade ---------------- */
+.cascade{margin-top:60px;display:flex;flex-direction:column;gap:14px}
+.cas{display:grid;grid-template-columns:86px 1.1fr .9fr auto;gap:22px;align-items:center;
+  background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:22px 28px;
+  opacity:0;transform:translateX(-30px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+.cas.vis{opacity:1;transform:none}
+.cas .tno{font-size:26px;font-weight:700;letter-spacing:-.02em}
+.cas .tno small{display:block;font-size:10.5px;letter-spacing:.16em;color:var(--dim2);font-weight:600}
+.cas .desc{font-size:14.5px;color:var(--dim)}
+.cas .desc b{color:var(--white);display:block;font-size:15.5px;margin-bottom:2px}
+.unc{display:flex;align-items:center;gap:12px}
+.unc .track{flex:1;height:8px;border-radius:5px;background:var(--panel2);overflow:hidden;min-width:110px}
+.unc .track i{display:block;height:100%;border-radius:5px;width:0;transition:width 1.1s var(--ease) .2s}
+.cas.vis .unc .track i{width:var(--w)}
+.unc span{font-size:12.5px;color:var(--dim);font-variant-numeric:tabular-nums;min-width:44px}
+.t1 .unc i{background:var(--green)}.t2 .unc i{background:#6FD98B}.t3 .unc i{background:var(--teal)}
+.t4 .unc i{background:#7FB6E0}.t5 .unc i{background:var(--warn)}
+.paia{margin-top:36px;border-left:3px solid var(--teal);padding:6px 0 6px 24px;color:var(--dim);font-size:15.5px;max-width:70ch}
+.paia b{color:var(--white)}
+@media(max-width:900px){.cas{grid-template-columns:64px 1fr;grid-auto-rows:auto}.cas .unc,.cas .tier{grid-column:2}}
+
+/* ---------------- three surfaces ---------------- */
+.surfaces{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.surf{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:36px 32px;display:flex;flex-direction:column;
+  transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease)}
+.surf:hover{transform:translateY(-8px);border-color:var(--green-d);box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.surf .badge{font-size:10.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--teal);
+  border:1px solid rgba(73,211,190,.35);border-radius:100px;padding:5px 12px;align-self:flex-start;margin-bottom:20px}
+.surf h3{font-size:23px;margin-bottom:10px}
+.surf .dom{font-size:12.5px;color:var(--dim2);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin-bottom:16px}
+.surf p{font-size:14.8px;color:var(--dim);flex:1}
+.surf ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:9px}
+.surf li{font-size:13.8px;color:var(--dim);padding-left:22px;position:relative}
+.surf li::before{content:"→";position:absolute;left:0;color:var(--green)}
+@media(max-width:1000px){.surfaces{grid-template-columns:1fr}}
+
+/* API code block */
+.apiwin{margin-top:64px;background:#081018;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.apibar{display:flex;align-items:center;gap:8px;padding:15px 22px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.apibar i{width:11px;height:11px;border-radius:50%;background:var(--line)}
+.apibar .lbl{margin-left:12px;font-size:12.5px;color:var(--dim2);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.apicode{padding:28px 30px;font:13.5px/1.75 ui-monospace,SFMono-Regular,Menlo,monospace;color:#B9CBDD;overflow-x:auto;white-space:pre;min-height:330px}
+.apicode .k{color:#7FB6E0}.apicode .s{color:var(--green2)}.apicode .n{color:var(--warn)}.apicode .c{color:var(--dim2)}.apicode .tealx{color:var(--teal)}
+.cursor{display:inline-block;width:8px;height:15px;background:var(--green);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+/* ---------------- calculators ---------------- */
+.calcwrap{display:grid;grid-template-columns:1fr 1fr;gap:26px;margin-top:56px}
+.calc{background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:40px}
+.calc h3{font-size:22px;margin-bottom:6px}
+.calc .sub{font-size:14px;color:var(--dim);margin-bottom:26px}
+.field{margin-bottom:20px}
+.field label{display:block;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim2);margin-bottom:9px;font-weight:650}
+.field select,.field input[type=number]{width:100%;background:var(--panel2);border:1px solid var(--line);border-radius:13px;color:var(--white);
+  padding:14px 16px;font-size:15.5px;outline:none;appearance:none}
+.field select:focus,.field input:focus{border-color:var(--green)}
+.field input[type=range]{width:100%;accent-color:var(--green)}
+.rangeval{font-size:13.5px;color:var(--dim);margin-top:6px;font-variant-numeric:tabular-nums}
+.calcout{margin-top:28px;border-top:1px solid var(--line);padding-top:26px}
+.calcout .big{display:flex;align-items:baseline;gap:10px}
+.calcout .big b{font-size:clamp(34px,3.2vw,50px);letter-spacing:-.04em;line-height:1;color:var(--green)}
+.calcout .big span{color:var(--dim);font-size:14.5px}
+.calcout .note{font-size:12px;color:var(--dim2);margin-top:14px;line-height:1.6}
+.gridbars{margin-top:24px;display:flex;flex-direction:column;gap:10px}
+.gbar{display:grid;grid-template-columns:44px 1fr 64px;gap:12px;align-items:center;font-size:13px;color:var(--dim)}
+.gbar .track{height:12px;background:var(--panel2);border-radius:7px;overflow:hidden}
+.gbar .track i{display:block;height:100%;border-radius:7px;background:linear-gradient(90deg,var(--green-d),var(--green));width:0;transition:width .9s var(--ease)}
+.gbar.you .track i{background:linear-gradient(90deg,var(--teal-d),var(--teal))}
+.gbar .kg{text-align:right;font-variant-numeric:tabular-nums;color:var(--white);font-weight:600;font-size:13px}
+@media(max-width:1000px){.calcwrap{grid-template-columns:1fr}}
+
+/* ---------------- BoM screening ---------------- */
+.bomgrid{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center;margin-top:20px}
+.bomwin{background:#081018;border:1px solid var(--line);border-radius:22px;overflow:hidden}
+.bomrows{padding:10px 0;min-height:330px}
+.bomrow{display:grid;grid-template-columns:1fr 92px 120px;gap:14px;align-items:center;padding:11px 24px;
+  font:13px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:#B9CBDD;border-bottom:1px solid rgba(255,255,255,.04);
+  opacity:0;transform:translateY(8px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.bomrow.vis{opacity:1;transform:none}
+.bomrow .cas-no{color:var(--dim2)}
+.flag{font-size:10.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:4px 9px;text-align:center;border:1px solid}
+.flag.ok{color:var(--ok);border-color:rgba(91,212,105,.35);background:rgba(91,212,105,.07)}
+.flag.warn{color:var(--warn);border-color:rgba(232,195,90,.35);background:rgba(232,195,90,.07)}
+.flag.crit{color:var(--crit);border-color:rgba(232,90,106,.35);background:rgba(232,90,106,.07)}
+.scanline{height:2px;background:linear-gradient(90deg,transparent,var(--green),transparent);opacity:0;box-shadow:0 0 18px var(--glow)}
+.bomstats{display:flex;gap:14px;padding:18px 24px;border-top:1px solid var(--line);font-size:12.5px;color:var(--dim)}
+.bomstats b{color:var(--white)}
+.bomlist{list-style:none;margin-top:26px;display:flex;flex-direction:column;gap:14px}
+.bomlist li{padding-left:30px;position:relative;color:var(--dim);font-size:15.5px}
+.bomlist li b{color:var(--white)}
+.bomlist li::before{content:"✓";position:absolute;left:0;top:0;color:var(--green);font-weight:700}
+@media(max-width:1000px){.bomgrid{grid-template-columns:1fr}}
+
+/* ---------------- DPP ---------------- */
+.dppgrid{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;margin-top:20px}
+.timeline{margin-top:34px;display:flex;flex-direction:column;gap:0}
+.tl-item{display:grid;grid-template-columns:22px 1fr;gap:20px;padding-bottom:26px;position:relative}
+.tl-item::before{content:"";position:absolute;left:10px;top:22px;bottom:0;width:1px;background:var(--line)}
+.tl-item:last-child::before{display:none}
+.tl-dot{width:21px;height:21px;border-radius:50%;border:2px solid var(--line);background:var(--panel);z-index:1;margin-top:2px}
+.tl-item.live .tl-dot{border-color:var(--green);background:rgba(91,212,105,.15);box-shadow:0 0 16px var(--glow)}
+.tl-item .when{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim2);font-weight:700}
+.tl-item.live .when{color:var(--green)}
+.tl-item p{font-size:15px;color:var(--dim);margin-top:4px}
+.tl-item p b{color:var(--white)}
+.dppcard{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:36px}
+.dppcard h3{display:flex;justify-content:space-between;align-items:center;font-size:17px}
+.readi{font-size:12px;color:var(--teal);border:1px solid rgba(73,211,190,.35);padding:5px 12px;border-radius:100px}
+.dppfields{margin-top:24px;display:flex;flex-direction:column;gap:0}
+.dpf{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;padding:11px 0;border-top:1px solid var(--line);font-size:14px}
+.dpf .fn{color:var(--dim)}
+.dpf .fsrc{font-size:11.5px;color:var(--dim2);font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+.pill{width:10px;height:10px;border-radius:50%}
+.pill.ok{background:var(--ok);box-shadow:0 0 10px rgba(91,212,105,.6)}
+.pill.warn{background:var(--warn)}
+.pill.miss{background:var(--crit)}
+.dppmeter{margin-top:26px}
+.dppmeter .track{height:10px;background:var(--panel2);border-radius:6px;overflow:hidden}
+.dppmeter .track i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--green-d),var(--green));transition:width 1.2s var(--ease) .3s}
+.dppmeter.vis .track i{width:80%}
+.dppmeter span{font-size:12.5px;color:var(--dim);margin-top:9px;display:block}
+@media(max-width:1000px){.dppgrid{grid-template-columns:1fr}}
+
+/* ---------------- GHG ---------------- */
+.ghgwin{background:var(--panel);border:1px solid var(--line);border-radius:22px;overflow:hidden;margin-top:56px}
+.ghgbar{display:flex;justify-content:space-between;align-items:center;padding:18px 26px;border-bottom:1px solid var(--line);background:var(--panel2)}
+.ghgbar b{font-size:15px}
+.ghgbar .tools{display:flex;gap:10px;font-size:12px;color:var(--dim2)}
+.ghgbar .tools span{border:1px solid var(--line);border-radius:8px;padding:5px 11px}
+.ghgrows{padding:6px 0}
+.ghgrow{display:grid;grid-template-columns:auto 1fr auto auto;gap:16px;align-items:center;padding:11px 26px;font-size:14.5px;border-bottom:1px solid rgba(255,255,255,.04)}
+.ghgrow .cat{color:var(--dim)}
+.ghgrow.parent .cat{color:var(--white);font-weight:650}
+.ghgrow .twist{color:var(--dim2);font-size:11px;width:14px}
+.ghgrow .num{font-variant-numeric:tabular-nums;font-weight:600;text-align:right;min-width:90px}
+.ghgrow.total{background:rgba(91,212,105,.05)}
+.ghgrow.total .cat,.ghgrow.total .num{color:var(--green);font-weight:700}
+.ghgrow .cmp{font-size:12px;color:var(--teal);min-width:60px;text-align:right}
+/* ---------------- pricing ---------------- */
+.plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
+.plan{background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:40px 34px;display:flex;flex-direction:column;position:relative;
+  transition:transform .45s var(--ease),border-color .45s var(--ease)}
+.plan:hover{transform:translateY(-8px)}
+.plan.hot{border-color:var(--green-d);background:linear-gradient(170deg,#0E1E16,#0B141D)}
+.plan .pop{position:absolute;top:-13px;left:50%;transform:translateX(-50%);font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  background:linear-gradient(92deg,var(--green),var(--teal-d));color:#04220D;border-radius:100px;padding:6px 16px}
+.plan h3{font-size:19px}
+.plan .price{margin:18px 0 4px;display:flex;align-items:baseline;gap:8px}
+.plan .price b{font-size:clamp(32px,3vw,44px);letter-spacing:-.03em}
+.plan .price span{color:var(--dim2);font-size:14px}
+.plan .pdesc{font-size:13.5px;color:var(--dim);margin-bottom:22px}
+.plan ul{list-style:none;display:flex;flex-direction:column;gap:11px;flex:1}
+.plan li{font-size:14px;color:var(--dim);padding-left:24px;position:relative}
+.plan li::before{content:"✓";position:absolute;left:0;color:var(--green);font-weight:700}
+.plan .btn{margin-top:28px;justify-content:center}
+.price-note{font-size:13px;color:var(--dim2);margin-top:28px;max-width:66ch}
+@media(max-width:1000px){.plans{grid-template-columns:1fr}}
+
+/* ---------------- partners / team ---------------- */
+.logos{display:flex;gap:16px;flex-wrap:wrap;margin-top:44px}
+.plogo{border:1px solid var(--line);border-radius:16px;padding:22px 34px;color:var(--dim);font-weight:650;font-size:16px;letter-spacing:-.01em;
+  transition:all .4s var(--ease)}
+.plogo:hover{color:var(--white);border-color:#2C4257;transform:translateY(-4px)}
+.team{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:56px;max-width:900px}
+.member{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:36px}
+.member .avatar{width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,var(--green-d),var(--teal-d));display:flex;align-items:center;justify-content:center;
+  font-weight:700;font-size:20px;color:#04220D;margin-bottom:20px}
+.member h3{font-size:19px}
+.member .role{font-size:13px;color:var(--teal);margin:3px 0 14px}
+.member p{font-size:14.5px;color:var(--dim)}
+@media(max-width:800px){.team{grid-template-columns:1fr}}
+
+/* ---------------- contact / footer ---------------- */
+#contact .panel{background:linear-gradient(160deg,#0E1E16,#0A141C);border:1px solid var(--green-d);border-radius:30px;padding:70px 60px;text-align:center;
+  position:relative;overflow:hidden}
+#contact .panel::before{content:"";position:absolute;inset:-40%;background:radial-gradient(circle at 50% 0%,rgba(91,212,105,.14),transparent 55%);pointer-events:none}
+#contact h2{margin-bottom:16px}
+#contact .lede{margin:0 auto 36px}
+footer{border-top:1px solid var(--line);padding:56px 0 44px;font-size:13.5px;color:var(--dim2)}
+footer .cols{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+footer img{height:26px;margin-bottom:16px;opacity:.9}
+footer h4{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
+footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
+footer a:hover{color:var(--white)}
+footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+@media(max-width:900px){footer .cols{grid-template-columns:1fr 1fr}}
+
+/* ---------------- reveal ---------------- */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.rv.vis{opacity:1;transform:none}
+.rv.d1{transition-delay:.08s}.rv.d2{transition-delay:.16s}.rv.d3{transition-delay:.24s}.rv.d4{transition-delay:.32s}
+
+@media(prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+  .rv,.cas,.bomrow{opacity:1!important;transform:none!important}
+}
+@media(max-width:600px){.wrap{padding:0 24px}section{padding:84px 0}
+  .count{flex-wrap:wrap}.count .cell{min-width:0;padding:14px 4px}
+  #lookup .panel{padding:26px 20px}.lk-search{flex-direction:column;align-items:stretch}
+  .lk-search select{width:100%;min-width:0}.dcard{padding:22px;min-height:0}
+  .calc{padding:26px 20px}.bomrow{grid-template-columns:1fr 84px}.bomrow .flag{grid-column:2}
+  .cas{padding:18px 20px}.dppcard{padding:24px 20px}#contact .panel{padding:44px 24px}}
+</style>
+</head>
+<body>
+
+<div class="hero-bg"><div class="orb g"></div><div class="orb t"></div><div class="grid-lines"></div></div>
+
+<nav>
+  <div class="wrap">
+    <a href="#top"><img src="data:image/png;base64,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" alt="ECO360 — the compliance and carbon data layer for physical products"></a>
+    <div class="nlinks">
+      <a href="#lookup">Data</a>
+      <a href="#platform">Platform</a>
+      <a href="#bom">Compliance</a>
+      <a href="#dpp">DPP</a>
+      <a href="#pricing">Pricing</a>
+      <a class="ncta" href="#contact">Book a demo</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ================= HERO ================= -->
+<section id="hero">
+  <a id="top"></a>
+  <div class="wrap hero-main">
+    <div>
+      <span class="eyebrow">The AI platform for the circular electronics economy</span>
+      <h1>Every number<br>carries its <span class="gr">proof</span>.</h1>
+      <p class="lede">ECO360 is the compliance and carbon data layer for physical products. Product-level CO₂, substance screening and digital product passports — with a confidence tier and a source on every figure, cutting EU reporting costs by up to&nbsp;90%.</p>
+      <div class="hero-ctas">
+        <a class="btn primary" href="#contact">Book a demo →</a>
+        <a class="btn ghost" href="#lookup">Look up a device</a>
+      </div>
+      <p class="hero-note">Deepest in electronics — the same engine screens any bill of materials and reports for any company.</p>
+    </div>
+    <div>
+      <div class="stack-scene">
+        <div class="stack" aria-hidden="true">
+          <div class="layer l1"></div>
+          <div class="layer l2"></div>
+          <div class="layer l3"></div>
+          <div class="layer l4"></div>
+          <div class="layer l5"></div>
+          <div class="layer l6"></div>
+        </div>
+        <ul class="stackkey" aria-hidden="true">
+          <li class="k6"><i></i>API · Reports</li>
+          <li class="k5"><i></i>Circularity · DPP</li>
+          <li class="k4"><i></i>Computation</li>
+          <li class="k3"><i></i>CO₂ resolver</li>
+          <li class="k2"><i></i>Device identity</li>
+          <li class="k1"><i></i>Ingestion</li>
+        </ul>
+      </div>
+      <p class="stack-caption">One engine, six layers — sold as an API, a console and a product card.</p>
+    </div>
+  </div>
+  <div class="wrap">
+    <div class="stats rv">
+      <!-- PLACEHOLDER FIGURES: verify each stat before publishing. Sources: pitch deck June 2026 + platform DB. -->
+      <div class="stat"><b data-count="100000" data-suffix="+">0</b><span>devices in the CO₂ database</span></div>
+      <div class="stat"><b data-count="452" data-suffix="+">0</b><span>product categories</span></div>
+      <div class="stat"><b data-count="46">0</b><span>national electricity grids, two factor sets</span></div>
+      <div class="stat"><b>100%</b><span>of figures carry a tier and a source</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= EMPCO COUNTDOWN ================= -->
+<section id="empco">
+  <div class="empco-band">
+    <div class="wrap empco-grid">
+      <div class="rv">
+        <span class="eyebrow t">Directive (EU) 2024/825 — applies from 27 September 2026</span>
+        <h2 style="font-size:clamp(28px,3.4vw,46px);margin:16px 0 14px">Unsubstantiated green claims<br>are about to become <span class="gr">illegal</span>.</h2>
+        <p class="lede" style="font-size:16.5px">From 27 September 2026 the EU prohibits environmental claims that cannot be demonstrated — no balancing test, no exceptions. The cheapest way to comply is to say nothing. The better way is to say it with proof. ECO360 generates the claim <b style="color:var(--white)">and</b> its substantiation page.</p>
+      </div>
+      <div class="rv d2">
+        <div class="count" role="timer" aria-label="Time until Directive 2024/825 applies">
+          <div class="cell"><b id="cd-d">—</b><span>days</span></div>
+          <div class="cell"><b id="cd-h">—</b><span>hours</span></div>
+          <div class="cell"><b id="cd-m">—</b><span>min</span></div>
+          <div class="cell"><b id="cd-s">—</b><span>sec</span></div>
+        </div>
+        <p class="empco-date">Counting down to 27 Sep 2026, 00:00 CET · EmpCo Directive, Annex I of the UCPD</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= PROBLEM ================= -->
+<section id="problem">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow">The problem</span>
+      <h2>The true cost of<br><span class="gr">invisible</span> emissions.</h2>
+      <p class="lede">Sustainability reporting costs an average of €320,000 per company per year — most of it spent chasing data that already exists somewhere else.</p>
+      <small class="src">Source: IFO / BDI study, 2024. <!-- UNVERIFIED CLAIMS: confirm citation before publishing --></small>
+    </div>
+    <div class="pains">
+      <div class="pain rv"><div class="ico">€</div><h3>High cost</h3><p>Consultants, audits and manual data collection — a recurring six-figure line item.</p></div>
+      <div class="pain rv d1"><div class="ico">⇄</div><h3>Data chaos</h3><p>Product data in one silo, emission factors in another, supplier evidence in email.</p></div>
+      <div class="pain rv d2"><div class="ico">✎</div><h3>Manual & complex</h3><p>Spreadsheets that break the moment a regulation, a factor or a product changes.</p></div>
+      <div class="pain rv d3"><div class="ico">⧗</div><h3>Slow to act</h3><p>By the time the report is finished, the decisions it should have informed are already made.</p></div>
+    </div>
+    <div class="bigcost rv">
+      <div class="costcol">
+        <span class="tag">Before — manual reporting</span>
+        <b>~€400,000</b>
+        <p>Typical annual compliance cost: external consultants, data collection, one-off calculations that expire the day they are delivered.</p>
+      </div>
+      <div class="costcol after">
+        <span class="tag">After — with ECO360</span>
+        <b>~€40,000</b>
+        <p>Automated data layer, continuously updated. Up to 90% lower cost — and every figure survives an audit. <!-- UNVERIFIED CLAIMS: customer-case basis required before publishing --></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LOOKUP DEMO ================= -->
+<section id="lookup">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow t">Live data · demo</span>
+      <h2>Ask the database<br>what a device <span class="gr">costs the planet</span>.</h2>
+      <p class="lede">Model-level embodied carbon as a queryable service — not a category average, not a calculator that asks you for a bill of materials first. No other commercial API does this.</p>
+    </div>
+    <div class="panel rv">
+      <div class="lk-grid">
+        <div>
+          <h3>Device lookup</h3>
+          <p style="font-size:14.5px;color:var(--dim);margin-top:8px">Pick a model and configuration. The resolver walks the cascade T1→T5 and returns the best evidence available — labelled as exactly what it is.</p>
+          <div class="lk-search">
+            <select id="devsel" aria-label="Choose a demo device">
+              <option value="ip14p">Apple iPhone 14 Pro · 256 GB</option>
+              <option value="mba">Apple MacBook Air M1 · 512 GB</option>
+              <option value="galaxy">Samsung Galaxy S23 · 256 GB</option>
+              <option value="unknown">Unbranded tablet · 10″ (unknown model)</option>
+            </select>
+            <button class="btn primary" id="devgo">Resolve</button>
+          </div>
+          <div class="demochips">
+            <span class="chip" data-dev="ip14p">iPhone 14 Pro</span>
+            <span class="chip" data-dev="mba">MacBook Air M1</span>
+            <span class="chip" data-dev="galaxy">Galaxy S23</span>
+            <span class="chip" data-dev="unknown">Unknown device</span>
+          </div>
+          <p class="demonote">⚠ Demo data for illustration. Production figures are served from the live database with per-record sources.
+          <!-- DEMO DATA: replace with live API (GET /v1/devices/{id}/carbon) in phase 2 — see Jorma guide §3 --></p>
+        </div>
+        <div class="dcard" id="dcard" aria-live="polite">
+          <!-- filled by JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TIERS / CASCADE ================= -->
+<section id="tiers" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow">The rule that runs the platform</span>
+      <h2>No number without<br>a <span class="gr">tier and a source</span>.</h2>
+      <p class="lede">The resolver tries five levels of evidence in order and stops at the first hit. Whatever it finds, it tells you how it knows — measured, derived or estimated, with the uncertainty attached. Presenting an estimate as a measurement is the one thing this platform will never do.</p>
+    </div>
+    <div class="cascade" id="cascade">
+      <div class="cas t1">
+        <div class="tno">T1<small>Measured</small></div>
+        <div class="desc"><b>Manufacturer PCF — exact model & configuration</b>Apple, Samsung, Dell, HP, Lenovo, Microsoft and others publish per-device environmental reports.</div>
+        <div class="unc"><div class="track"><i style="--w:20%"></i></div><span>±20%</span></div>
+        <span class="tier meas">Measured</span>
+      </div>
+      <div class="cas t2">
+        <div class="tno">T2<small>Measured</small></div>
+        <div class="desc"><b>Manufacturer PCF — nearest configuration</b>Same model, different RAM or storage — adjusted from the published figure.</div>
+        <div class="unc"><div class="track"><i style="--w:30%"></i></div><span>±30%</span></div>
+        <span class="tier meas">Measured</span>
+      </div>
+      <div class="cas t3">
+        <div class="tno">T3<small>Derived</small></div>
+        <div class="desc"><b>Third-party LCA databases</b>Independent published datasets for older models.</div>
+        <div class="unc"><div class="track"><i style="--w:35%"></i></div><span>±35%</span></div>
+        <span class="tier der">Derived</span>
+      </div>
+      <div class="cas t4">
+        <div class="tno">T4<small>Derived</small></div>
+        <div class="desc"><b>Attribute model, calibrated on the T1 corpus</b>Peer-reviewed component model (die area, DRAM, NAND, battery, PCB) for manufacturers that publish nothing.</div>
+        <div class="unc"><div class="track"><i style="--w:50%"></i></div><span>±50%</span></div>
+        <span class="tier der">Derived</span>
+      </div>
+      <div class="cas t5">
+        <div class="tno">T5<small>Estimated</small></div>
+        <div class="desc"><b>Category average</b>The honest fallback for an unknown device — clearly labelled, never dressed up.</div>
+        <div class="unc"><div class="track"><i style="--w:70%"></i></div><span>±70%</span></div>
+        <span class="tier est">Estimated</span>
+      </div>
+    </div>
+    <p class="paia rv">The industry's own reference tool publishes <b>±20% (1σ)</b> for a single laptop model — with a P5–P95 range spanning a factor of 3.5. <b>We will not promise tighter than the OEMs' own tooling.</b> If a competitor does, they are overclaiming.</p>
+  </div>
+</section>
+
+<!-- ================= THREE SURFACES ================= -->
+<section id="platform" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow t">One engine · three surfaces</span>
+      <h2>Buy it as an API,<br>a console, or a <span class="gr">product card</span>.</h2>
+    </div>
+    <div class="surfaces">
+      <div class="surf rv">
+        <span class="badge">The product</span>
+        <h3>Data API</h3>
+        <div class="dom">api.eco360.ai/v1</div>
+        <p>Model-level device carbon, minerals, WEEE data and compliance status as JSON. Usage-based pricing. Built for web shops, ERP vendors, refurb platforms and passport operators.</p>
+        <ul>
+          <li>Tier + source + uncertainty on every field</li>
+          <li>Substantiation URL in every comparative response</li>
+          <li>Country-specific use-phase on request</li>
+        </ul>
+      </div>
+      <div class="surf rv d1">
+        <span class="badge">For your team</span>
+        <h3>Console</h3>
+        <div class="dom">console.eco360.ai</div>
+        <p>Upload your product catalogue as it is — CSV straight from the ERP. Fuzzy matching against the global database, inventory intelligence, GHG Scope 1/2/3 reporting with year-on-year comparison.</p>
+        <ul>
+          <li>18 built-in inventory analyses</li>
+          <li>AI-assisted matching and gap-filling</li>
+          <li>GHG Protocol grid → CSV, PDF, print</li>
+        </ul>
+      </div>
+      <div class="surf rv d2">
+        <span class="badge">For your customers</span>
+        <h3>Product card · DPP</h3>
+        <div class="dom">label.eco360.ai · id.eco360.ai</div>
+        <p>A public per-product page and embeddable widget. Not a green stamp — a data disclosure that complies with the EmpCo Directive by design: numbers, units, method, source, retrieval date.</p>
+        <ul>
+          <li>QR to a full substantiation page</li>
+          <li>GS1 Digital Link identifiers</li>
+          <li>EN-standards-aligned DPP payload</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="apiwin rv" id="apiwin">
+      <div class="apibar"><i></i><i></i><i></i><span class="lbl">GET api.eco360.ai/v1/devices/iphone-14-pro-256/carbon?country=FI</span></div>
+      <div class="apicode" id="apicode"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CALCULATORS ================= -->
+<section id="calc" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow">Try the numbers</span>
+      <h2>Same device, different country —<br><span class="gr">different footprint</span>.</h2>
+      <p class="lede">A use-phase figure computed on one national grid is wrong in the other 45. ECO360 computes the use phase from the device's actual energy draw and the electricity factor of the market it is sold in.</p>
+    </div>
+    <div class="calcwrap">
+      <div class="calc rv">
+        <h3>Use-phase CO₂ by country</h3>
+        <p class="sub">Physical energy draw × national grid factor × years of use.</p>
+        <div class="field">
+          <label for="ccountry">Country of use</label>
+          <select id="ccountry">
+            <option value="72" data-cc="FI" selected>Finland — 72 g CO₂e/kWh</option>
+            <option value="36" data-cc="SE">Sweden — 36 g CO₂e/kWh</option>
+            <option value="31" data-cc="NO">Norway — 31 g CO₂e/kWh</option>
+            <option value="44" data-cc="FR">France — 44 g CO₂e/kWh</option>
+            <option value="344" data-cc="DE">Germany — 344 g CO₂e/kWh</option>
+            <option value="615" data-cc="PL">Poland — 615 g CO₂e/kWh</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="ckwh">Device energy use — <span id="ckwhv">12</span> kWh / year</label>
+          <input type="range" id="ckwh" min="2" max="120" value="12" step="1">
+          <div class="rangeval">Phone ≈ 4 · tablet ≈ 12 · laptop ≈ 30 · monitor ≈ 60 kWh/yr</div>
+        </div>
+        <div class="field">
+          <label for="cyears">Years in use — <span id="cyearsv">4</span></label>
+          <input type="range" id="cyears" min="1" max="8" value="4" step="1">
+        </div>
+        <div class="calcout">
+          <div class="big"><b id="couts">3.5</b><span>kg CO₂e use-phase total</span></div>
+          <div class="gridbars" id="cbars"></div>
+          <p class="note">Location-based factors, Our World in Data 2024. Residual-mix (market-based) factors are also served by the API. Figures are illustrative of the calculation — production values come from the live factor table.</p>
+        </div>
+      </div>
+      <div class="calc rv d1">
+        <h3>Reporting cost estimator</h3>
+        <p class="sub">What EU compliance reporting roughly costs — before and after automation.</p>
+        <div class="field">
+          <label for="eprod">Products in catalogue — <span id="eprodv">500</span></label>
+          <input type="range" id="eprod" min="50" max="10000" value="500" step="50">
+        </div>
+        <div class="field">
+          <label for="efrm">Reporting obligations</label>
+          <select id="efrm">
+            <option value="1">Customer CO₂ questionnaires only</option>
+            <option value="2" selected>+ product carbon claims (EmpCo)</option>
+            <option value="3">+ GHG Scope 1/2/3 report</option>
+            <option value="4">+ digital product passports</option>
+          </select>
+        </div>
+        <div class="calcout">
+          <div class="big"><b id="esave">—</b><span>estimated annual saving</span></div>
+          <div class="gridbars">
+            <div class="gbar"><span>Now</span><div class="track"><i id="enow" style="background:linear-gradient(90deg,#7A4C57,var(--crit))"></i></div><span class="kg" id="enowv">—</span></div>
+            <div class="gbar you"><span>ECO360</span><div class="track"><i id="eafter"></i></div><span class="kg" id="eafterv">—</span></div>
+          </div>
+          <p class="note">⚠ Illustrative estimate anchored to the €320k/yr industry average (IFO/BDI 2024) and observed automation savings of up to 90%. Not a quotation. <!-- UNVERIFIED CLAIMS: model must be reviewed before publishing --></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= BOM SCREENING ================= -->
+<section id="bom" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow t">Substance compliance</span>
+      <h2>Send the file<br><span class="gr">as it is</span>.</h2>
+      <p class="lede">No onboarding project, no supplier campaign, no template. The BoM engine reads your bill of materials in whatever shape it left your ERP — then screens every article against RoHS, REACH, POPs and UK REACH.</p>
+    </div>
+    <div class="bomgrid">
+      <div class="rv">
+        <ul class="bomlist">
+          <li><b>Per-article screening, tree-walked.</b> Thresholds are applied at the smallest article level — the interpretation confirmed by EU case law, implemented rather than just cited.</li>
+          <li><b>Identifier validation first.</b> In one real customer file, 27% of CAS numbers failed their own check digit. We validate before we screen — garbage in is caught, not propagated.</li>
+          <li><b>SVHC double-check.</b> Your screening result is cross-referenced against suppliers' own legally mandated SCIP notifications. A conflict raises a flag no manual process would catch.</li>
+          <li><b>Dated list snapshots.</b> Every screening records the regulation list in force at the time — so when a substance is added, you can answer both "what just became reportable?" and "was what we shipped clear under the list that applied then?"</li>
+        </ul>
+      </div>
+      <div class="bomwin rv d1">
+        <div class="apibar"><i></i><i></i><i></i><span class="lbl">bom_screening — DCGrid_ITM111185.xlsx · 1,847 articles</span></div>
+        <div class="bomrows" id="bomrows">
+          <div class="scanline" id="scanline"></div>
+        </div>
+        <div class="bomstats"><span><b id="bs-ok">0</b> clear</span><span><b id="bs-warn">0</b> review</span><span><b id="bs-crit">0</b> reportable</span><span style="margin-left:auto"><b id="bs-cas">0</b> invalid CAS caught</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= DPP ================= -->
+<section id="dpp" style="padding-top:40px">
+  <div class="wrap">
+    <div class="dppgrid">
+      <div class="rv">
+        <span class="eyebrow">Digital Product Passport</span>
+        <h2 style="margin-top:16px">The registry is live.<br>Be <span class="gr">years ahead</span> of the mandate.</h2>
+        <p class="lede" style="margin-top:18px">The EU DPP registry opened in July 2026 and the six harmonised EN standards are published. Passports for electronics become mandatory later — but the companies issuing standards-aligned passports now are the ones the market will trust when it does.</p>
+        <div class="timeline">
+          <div class="tl-item live"><div class="tl-dot"></div><div><span class="when">Live — 20 July 2026</span><p><b>EU DPP Registry opened</b> — with a free public repository of data models.</p></div></div>
+          <div class="tl-item live"><div class="tl-dot"></div><div><span class="when">Published — May–July 2026</span><p><b>Six harmonised EN standards</b> (EN 18216, 18219–18223) — ECO360 passports are built against them from day one.</p></div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div><span class="when">18 Feb 2027</span><p><b>Battery passport mandatory</b> (EV, industrial and LMT batteries).</p></div></div>
+          <div class="tl-item"><div class="tl-dot"></div><div><span class="when">~2027–2030</span><p><b>Electronics follows</b> via horizontal repairability and recyclability measures. The mandate arrives in stages — the readiness question arrives now, in every tender and every buyer questionnaire.</p></div></div>
+        </div>
+      </div>
+      <div class="dppcard rv d1">
+        <h3>DPP readiness — per product <span class="readi">demo</span></h3>
+        <div class="dppfields">
+          <div class="dpf"><span class="fn">Carbon footprint (PCF)</span><span class="fsrc">measured · PCF record</span><span class="pill ok"></span></div>
+          <div class="dpf"><span class="fn">Energy class & consumption</span><span class="fsrc">EPREL registry</span><span class="pill ok"></span></div>
+          <div class="dpf"><span class="fn">Repairability class</span><span class="fsrc">EU energy label</span><span class="pill ok"></span></div>
+          <div class="dpf"><span class="fn">Material composition</span><span class="fsrc">computed · 10 minerals</span><span class="pill ok"></span></div>
+          <div class="dpf"><span class="fn">SVHC status</span><span class="fsrc">screening + SCIP</span><span class="pill ok"></span></div>
+          <div class="dpf"><span class="fn">Recycled content %</span><span class="fsrc">supplier declaration</span><span class="pill warn"></span></div>
+          <div class="dpf"><span class="fn">Spare parts availability</span><span class="fsrc">manufacturer statement</span><span class="pill ok"></span></div>
+          <div class="dpf"><span class="fn">Repair manual URL</span><span class="fsrc">missing</span><span class="pill miss"></span></div>
+        </div>
+        <div class="dppmeter" id="dppmeter"><div class="track"><i></i></div><span>12 of 15 required fields resolved — 9 automatically from EU registries</span></div>
+        <p style="font-size:12px;color:var(--dim2);margin-top:18px">We don't ask you to type in data the EU already holds. The auto-enrich pipeline fills what EPREL and SCIP already know about your products.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GHG ================= -->
+<section id="ghg" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow">Corporate reporting</span>
+      <h2>Scope 1, 2 and 3 —<br>from the <span class="gr">same data</span> you already loaded.</h2>
+      <p class="lede">The GHG report assembles itself from three sources: your product catalogue's CO₂ figures, your Scope 1/2 inputs, and your own entries where judgement is needed. Full GHG Protocol hierarchy, year-on-year comparison, comments per row, export to CSV and PDF.</p>
+    </div>
+    <div class="ghgwin rv">
+      <div class="ghgbar"><b>GHG Report 2026 — draft</b><div class="tools"><span>Compare: 2025</span><span>CSV</span><span>PDF</span></div></div>
+      <div class="ghgrows">
+        <div class="ghgrow parent"><span class="twist">▾</span><span class="cat">Scope 1 — direct emissions</span><span class="num">128.4</span><span class="cmp">−12%</span></div>
+        <div class="ghgrow"><span class="twist"></span><span class="cat" style="padding-left:18px">Vehicle fleet</span><span class="num">96.1</span><span class="cmp">−8%</span></div>
+        <div class="ghgrow parent"><span class="twist">▾</span><span class="cat">Scope 2 — purchased energy (location-based)</span><span class="num">64.0</span><span class="cmp">−21%</span></div>
+        <div class="ghgrow parent"><span class="twist">▾</span><span class="cat">Scope 3 — value chain, 15 categories</span><span class="num">2,412.7</span><span class="cmp">−4%</span></div>
+        <div class="ghgrow"><span class="twist"></span><span class="cat" style="padding-left:18px">Cat 1 — purchased goods & services</span><span class="num">1,890.2</span><span class="cmp">−6%</span></div>
+        <div class="ghgrow"><span class="twist"></span><span class="cat" style="padding-left:18px">Cat 11 — use of sold products</span><span class="num">342.5</span><span class="cmp">+2%</span></div>
+        <div class="ghgrow total"><span class="twist"></span><span class="cat">Total — all scopes</span><span class="num">2,605.1</span><span class="cmp">−5%</span></div>
+      </div>
+    </div>
+    <small class="src rv" style="margin-top:14px">Demo values, tCO₂e. The report follows the GHG Protocol Scope 1/2/3 structure — the calculation basis for ESRS E1 and VSME alike.</small>
+  </div>
+</section>
+
+<!-- ================= PRICING ================= -->
+<section id="pricing" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow t">Pricing — published, on purpose</span>
+      <h2>No "request a quote"<br><span class="gr">theatre</span>.</h2>
+      <p class="lede">In a market where nearly every vendor hides its prices, a published price list is a feature. Annual subscription, high-touch onboarding included.</p>
+    </div>
+    <div class="plans">
+      <!-- PLACEHOLDER FIGURES: prices from pitch deck June 2026 — confirm current list before publishing -->
+      <div class="plan rv">
+        <h3>Starter</h3>
+        <div class="price"><b>€5,700</b><span>/ year</span></div>
+        <p class="pdesc">For a single catalogue and your first compliant carbon claims.</p>
+        <ul>
+          <li>Console + 1 product catalogue</li>
+          <li>Product CO₂ lookups with tier & source</li>
+          <li>Embeddable product-card widget</li>
+          <li>Email support</li>
+        </ul>
+        <a class="btn ghost" href="#contact">Start here</a>
+      </div>
+      <div class="plan hot rv d1">
+        <span class="pop">Most chosen</span>
+        <h3>Growth</h3>
+        <div class="price"><b>€9,120</b><span>/ year</span></div>
+        <p class="pdesc">For teams answering customer questionnaires and building the GHG report.</p>
+        <ul>
+          <li>Everything in Starter</li>
+          <li>GHG Scope 1/2/3 report + comparison years</li>
+          <li>BoM substance screening</li>
+          <li>Inventory intelligence — 18 analyses</li>
+          <li>Priority support</li>
+        </ul>
+        <a class="btn primary" href="#contact">Book a demo</a>
+      </div>
+      <div class="plan rv d2">
+        <h3>Professional</h3>
+        <div class="price"><b>€14,820</b><span>/ year</span></div>
+        <p class="pdesc">For companies shipping passports and integrating the data downstream.</p>
+        <ul>
+          <li>Everything in Growth</li>
+          <li>Data API access</li>
+          <li>DPP pages + GS1 Digital Link</li>
+          <li>Auto-enrich from EU registries</li>
+          <li>Dedicated success manager</li>
+        </ul>
+        <a class="btn ghost" href="#contact">Talk to us</a>
+      </div>
+    </div>
+    <p class="price-note rv">High-volume API usage is priced separately by call volume — <a href="#contact" style="color:var(--teal)">ask for the API rate card</a>. Prices exclude VAT.</p>
+  </div>
+</section>
+
+<!-- ================= PARTNERS ================= -->
+<section id="partners" style="padding-top:20px;padding-bottom:60px">
+  <div class="wrap">
+    <div class="sechead rv" style="margin-bottom:10px">
+      <span class="eyebrow">In good company</span>
+      <h2 style="font-size:clamp(26px,3vw,40px)">Partners & customers</h2>
+    </div>
+    <div class="logos rv">
+      <span class="plogo">Promeco</span>
+      <span class="plogo">ECO Store</span>
+      <span class="plogo">Telia</span>
+      <span class="plogo">NorthLadder</span>
+      <span class="plogo">Nordic Refurb</span>
+      <span class="plogo">Business Finland</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= TEAM ================= -->
+<section id="team" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow t">Team</span>
+      <h2 style="font-size:clamp(28px,3.4vw,48px)">Built by people who have<br>scaled this industry before.</h2>
+    </div>
+    <div class="team">
+      <div class="member rv">
+        <div class="avatar">JR</div>
+        <h3>Jyri Roselius</h3>
+        <div class="role">CEO · Co-founder</div>
+        <p>Led Piceasoft to Finland's fastest-growing company (2017) and an exit in 2021. Nokia background; 20+ years scaling software in 90+ countries.</p>
+      </div>
+      <div class="member rv d1">
+        <div class="avatar">KK</div>
+        <h3>Kari Ketola</h3>
+        <div class="role">COO · Co-founder</div>
+        <p>25+ years at Nokia and in global IT. International operations in China and Romania, Nordic sales at M-Files and Piceasoft.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= CONTACT ================= -->
+<section id="contact">
+  <div class="wrap">
+    <div class="panel rv">
+      <span class="eyebrow">Get started</span>
+      <h2 style="margin-top:14px">See your own products<br>in the <span class="gr">data layer</span>.</h2>
+      <p class="lede" style="max-width:56ch">Bring a product list or a BoM file to the demo — we'll run it through the platform live. That's the whole pitch.</p>
+      <div class="hero-ctas" style="justify-content:center">
+        <a class="btn primary" href="mailto:hello@eco360.ai?subject=Demo%20request">Book a demo →</a>
+        <a class="btn ghost" href="mailto:hello@eco360.ai?subject=API%20rate%20card">Get the API rate card</a>
+      </div>
+      <p class="hero-note" style="margin-top:26px">hello@eco360.ai <!-- PLACEHOLDER: confirm address exists before publishing --></p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img src="data:image/png;base64,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" alt="ECO360">
+        <p>The compliance and carbon data layer for physical products — deepest in electronics.</p>
+      </div>
+      <div>
+        <h4>Platform</h4>
+        <ul><li><a href="#lookup">Device data</a></li><li><a href="#platform">Data API</a></li><li><a href="#bom">BoM screening</a></li><li><a href="#dpp">Digital Product Passport</a></li><li><a href="#ghg">GHG reporting</a></li></ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul><li><a href="#team">Team</a></li><li><a href="#partners">Partners</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#contact">Contact</a></li></ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul><li><a href="#">Privacy</a></li><li><a href="#">Terms</a></li><li><a href="#">Claim methodology</a></li></ul>
+      </div>
+    </div>
+    <div class="legal">
+      <!-- COMPANY INFO GATE: add registered name, business ID (Y-tunnus), address and VAT number before publishing -->
+      <span>© 2026 EcoGreen360 Oy · Finland</span>
+      <span>Every figure on this site carries its source — or a comment marking it for verification before publication.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+"use strict";
+var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- reveal on scroll ---------- */
+var io = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); io.unobserve(e.target); } });
+},{threshold:.15});
+document.querySelectorAll('.rv,.cas').forEach(function(el){ io.observe(el); });
+
+/* ---------- animated counters ---------- */
+function animateCount(el){
+  var target=+el.dataset.count, suffix=el.dataset.suffix||'', dur=1600, t0=null;
+  if(reduced){ el.textContent=target.toLocaleString('en-US')+suffix; return; }
+  function step(t){ if(!t0)t0=t; var p=Math.min((t-t0)/dur,1); p=1-Math.pow(1-p,3);
+    el.textContent=Math.round(target*p).toLocaleString('en-US')+suffix;
+    if(p<1)requestAnimationFrame(step); }
+  requestAnimationFrame(step);
+}
+var cio = new IntersectionObserver(function(es){
+  es.forEach(function(e){ if(e.isIntersecting){ animateCount(e.target); cio.unobserve(e.target); } });
+},{threshold:.5});
+document.querySelectorAll('[data-count]').forEach(function(el){ cio.observe(el); });
+
+/* ---------- EmpCo countdown ---------- */
+var deadline = new Date('2026-09-27T00:00:00+02:00');
+function pad(n){ return (n<10?'0':'')+n; }
+function tick(){
+  var ms = deadline - new Date();
+  if(ms<0){ ms=0; }
+  var d=Math.floor(ms/864e5), h=Math.floor(ms%864e5/36e5), m=Math.floor(ms%36e5/6e4), s=Math.floor(ms%6e4/1e3);
+  document.getElementById('cd-d').textContent=d;
+  document.getElementById('cd-h').textContent=pad(h);
+  document.getElementById('cd-m').textContent=pad(m);
+  document.getElementById('cd-s').textContent=pad(s);
+}
+tick(); setInterval(tick,1000);
+
+/* ---------- device lookup demo ----------
+   DEMO DATA — phase 2 replaces this object with
+   GET api.eco360.ai/v1/devices/{id}/carbon  (see Jorma guide §3)
+   Manufacturing figures: Apple / Samsung published PER values are indicative here.
+   UNVERIFIED CLAIMS: verify every figure against the named source before publishing. */
+var DB={
+  ip14p:{model:'Apple iPhone 14 Pro',conf:'256 GB · resolved at T1',total:78,
+    rows:[['Manufacturing',66,'meas','Measured ±20%'],['Transport',2,'meas','Measured ±20%'],['Use · 4 yr · FI grid',7,'der','Derived ±35%'],['End of life',3,'der','Derived ±35%']],
+    src:'Manufacturing & transport: Apple Product Environmental Report 09/2022 · Use: 12 kWh/yr × FI 72 g/kWh · Method & uncertainty: <a href="#tiers">tier system</a>'},
+  mba:{model:'Apple MacBook Air M1',conf:'512 GB · resolved at T2 (nearest configuration)',total:181,
+    rows:[['Manufacturing',155,'meas','Measured ±30%'],['Transport',9,'meas','Measured ±30%'],['Use · 4 yr · FI grid',12,'der','Derived ±35%'],['End of life',5,'der','Derived ±35%']],
+    src:'Apple PER, adjusted from nearest published configuration · Use: 30 kWh/yr × FI 72 g/kWh'},
+  galaxy:{model:'Samsung Galaxy S23',conf:'256 GB · resolved at T1',total:70,
+    rows:[['Manufacturing',59,'meas','Measured ±20%'],['Transport',3,'meas','Measured ±20%'],['Use · 4 yr · FI grid',5,'der','Derived ±35%'],['End of life',3,'der','Derived ±35%']],
+    src:'Samsung product environmental data · Use: 9 kWh/yr × FI 72 g/kWh'},
+  unknown:{model:'Unbranded tablet · 10″',conf:'model not identified · resolved at T5 (category average)',total:87,
+    rows:[['Manufacturing',68,'est','Estimated ±70%'],['Transport',4,'est','Estimated ±70%'],['Use · 4 yr · FI grid',10,'est','Estimated ±70%'],['End of life',5,'est','Estimated ±70%']],
+    src:'Category average for 10″ tablets — clearly labelled as an estimate. This is what honesty looks like when the data runs out.'}
+};
+var tierClass={meas:'meas',der:'der',est:'est'};
+function renderDevice(key){
+  var d=DB[key]; if(!d) return;
+  var card=document.getElementById('dcard');
+  var maxSeg=d.rows.reduce(function(a,r){return a+r[1];},0);
+  var segCls=['m','t','u','e'];
+  var html='<div class="dmodel">'+d.model+'</div><div class="dconf">'+d.conf+'</div>'+
+    '<div class="dtotal"><b>'+d.total+'</b><span>kg CO₂e · cradle-to-grave</span></div>'+
+    '<div class="dbar">'+d.rows.map(function(r,i){return '<i class="'+segCls[i]+'" style="width:0" data-w="'+(r[1]/maxSeg*100)+'"></i>';}).join('')+'</div>'+
+    '<div class="dlegend"><span><i style="background:var(--green)"></i>Manufacturing</span><span><i style="background:var(--teal)"></i>Transport</span><span><i style="background:#7FB6E0"></i>Use</span><span><i style="background:#5E7186"></i>End of life</span></div>'+
+    '<div class="drows">'+d.rows.map(function(r){
+      return '<div class="drow"><span class="ph">'+r[0]+'</span><span class="val">'+r[1]+' kg</span><span class="tier '+tierClass[r[2]]+'">'+r[3]+'</span></div>';
+    }).join('')+'</div>'+
+    '<div class="dsource">Source: '+d.src+'</div>';
+  card.innerHTML=html;
+  requestAnimationFrame(function(){ requestAnimationFrame(function(){
+    card.querySelectorAll('.dbar i').forEach(function(i){ i.style.width=i.dataset.w+'%'; });
+  });});
+}
+document.getElementById('devgo').addEventListener('click',function(){ renderDevice(document.getElementById('devsel').value); });
+document.getElementById('devsel').addEventListener('change',function(){ renderDevice(this.value); });
+document.querySelectorAll('.chip').forEach(function(c){ c.addEventListener('click',function(){
+  document.getElementById('devsel').value=c.dataset.dev; renderDevice(c.dataset.dev); }); });
+renderDevice('ip14p');
+
+/* ---------- typed API JSON ---------- */
+var apiJSON=[
+'{',
+'  <span class="k">"device"</span>: <span class="s">"Apple iPhone 14 Pro · 256 GB"</span>,',
+'  <span class="k">"resolved_at"</span>: <span class="s">"T1"</span>,',
+'  <span class="k">"carbon_kg"</span>: {',
+'    <span class="k">"manufacturing"</span>: { <span class="k">"value"</span>: <span class="n">66</span>, <span class="k">"tier"</span>: <span class="tealx">"MEASURED"</span>, <span class="k">"uncertainty"</span>: <span class="s">"±20%"</span>,',
+'      <span class="k">"source"</span>: <span class="s">"Apple Product Environmental Report 09/2022"</span> },',
+'    <span class="k">"transport"</span>:     { <span class="k">"value"</span>: <span class="n">2</span>,  <span class="k">"tier"</span>: <span class="tealx">"MEASURED"</span> },',
+'    <span class="k">"use_phase"</span>:     { <span class="k">"value"</span>: <span class="n">7</span>,  <span class="k">"tier"</span>: <span class="tealx">"DERIVED"</span>,',
+'      <span class="k">"method"</span>: <span class="s">"12 kWh/yr × FI 72 gCO₂e/kWh × 4 yr"</span> },',
+'    <span class="k">"end_of_life"</span>:   { <span class="k">"value"</span>: <span class="n">3</span>,  <span class="k">"tier"</span>: <span class="tealx">"DERIVED"</span> }',
+'  },',
+'  <span class="k">"total_kg"</span>: <span class="n">78</span>,',
+'  <span class="k">"substantiation_url"</span>: <span class="s">"https://label.eco360.ai/s/ip14p-256-fi"</span>,',
+'  <span class="k">"retrieved"</span>: <span class="s">"2026-08-06"</span>',
+'}',
+'<span class="c">// every numeric field ships with a tier — the build fails if one doesn\'t</span>'
+];
+var apicode=document.getElementById('apicode'), apiStarted=false;
+function typeAPI(){
+  if(apiStarted) return; apiStarted=true;
+  if(reduced){ apicode.innerHTML=apiJSON.join('\n'); return; }
+  var line=0;
+  apicode.innerHTML='<span class="cursor"></span>';
+  var iv=setInterval(function(){
+    if(line>=apiJSON.length){ clearInterval(iv); apicode.querySelector('.cursor').remove(); return; }
+    var cur=apicode.querySelector('.cursor');
+    var div=document.createElement('div'); div.innerHTML=apiJSON[line];
+    apicode.insertBefore(div,cur); line++;
+  },110);
+}
+var aio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ typeAPI(); aio.unobserve(e.target);} }); },{threshold:.3});
+aio.observe(document.getElementById('apiwin'));
+
+/* ---------- use-phase calculator ---------- */
+var COUNTRIES=[['FI',72],['SE',36],['NO',31],['FR',44],['DE',344],['PL',615]];
+function calcUse(){
+  var f=+document.getElementById('ccountry').value;
+  var kwh=+document.getElementById('ckwh').value;
+  var yrs=+document.getElementById('cyears').value;
+  document.getElementById('ckwhv').textContent=kwh;
+  document.getElementById('cyearsv').textContent=yrs;
+  var kg=kwh*f*yrs/1000;
+  document.getElementById('couts').textContent=(kg<10?kg.toFixed(1):Math.round(kg));
+  var sel=document.getElementById('ccountry').selectedOptions[0].dataset.cc;
+  var max=Math.max.apply(null,COUNTRIES.map(function(c){return c[1];}))*kwh*yrs/1000;
+  var bars=COUNTRIES.map(function(c){
+    var v=c[1]*kwh*yrs/1000;
+    return '<div class="gbar'+(c[0]===sel?' you':'')+'"><span>'+c[0]+'</span><div class="track"><i style="width:'+(v/max*100)+'%"></i></div><span class="kg">'+(v<10?v.toFixed(1):Math.round(v))+' kg</span></div>';
+  }).join('');
+  document.getElementById('cbars').innerHTML=bars;
+}
+['ccountry','ckwh','cyears'].forEach(function(id){ document.getElementById(id).addEventListener('input',calcUse); });
+calcUse();
+
+/* ---------- cost estimator ----------
+   UNVERIFIED CLAIMS: illustrative model — anchor €320k avg (IFO/BDI 2024), scaled by
+   catalogue size and obligations, savings capped at 90%. Review before publishing. */
+function calcCost(){
+  var prods=+document.getElementById('eprod').value;
+  var frm=+document.getElementById('efrm').value;
+  document.getElementById('eprodv').textContent=prods.toLocaleString('en-US');
+  var base=60000 + frm*45000 + Math.sqrt(prods)*1800;
+  base=Math.min(base,520000);
+  var after=base*0.12 + frm*2000;
+  var save=base-after;
+  function eur(v){ return '€'+Math.round(v/1000)+'k'; }
+  document.getElementById('esave').textContent=eur(save);
+  document.getElementById('enowv').textContent=eur(base);
+  document.getElementById('eafterv').textContent=eur(after);
+  document.getElementById('enow').style.width='100%';
+  document.getElementById('eafter').style.width=(after/base*100)+'%';
+}
+['eprod','efrm'].forEach(function(id){ document.getElementById(id).addEventListener('input',calcCost); });
+calcCost();
+
+/* ---------- BoM scan animation ---------- */
+var BOM=[
+ ['PCB assembly, main board','7439-92-1','crit','Pb — reportable'],
+ ['Housing, ABS polymer','9003-56-9','ok','clear'],
+ ['Capacitor bank, tantalum','7440-25-7','ok','clear'],
+ ['Solder paste, SAC305','—','ok','clear'],
+ ['Flame retardant, casing','1163-19-5','crit','decaBDE — POPs'],
+ ['Connector, brass alloy','7440-66-6','warn','SCIP conflict'],
+ ['Display module, 10.1″','—','ok','clear'],
+ ['Cable assembly, PVC','85535-84-8','warn','SCCP — review'],
+ ['Battery cell, Li-ion','7439-93-2','ok','clear'],
+ ['Screw set, stainless','1333-86-4','ok','invalid CAS ✕']
+];
+var bomStarted=false;
+function runBom(){
+  if(bomStarted) return; bomStarted=true;
+  var host=document.getElementById('bomrows');
+  var counts={ok:0,warn:0,crit:0,cas:0};
+  var i=0;
+  function add(){
+    if(i>=BOM.length) return;
+    var r=BOM[i];
+    var row=document.createElement('div'); row.className='bomrow';
+    var flagCls=r[2], flagTxt=r[3];
+    if(flagTxt.indexOf('invalid CAS')>-1){ flagCls='warn'; counts.cas++; } else { counts[r[2]]++; }
+    row.innerHTML='<span>'+r[0]+'</span><span class="cas-no">'+r[1]+'</span><span class="flag '+flagCls+'">'+flagTxt+'</span>';
+    host.appendChild(row);
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ row.classList.add('vis'); }); });
+    document.getElementById('bs-ok').textContent=counts.ok;
+    document.getElementById('bs-warn').textContent=counts.warn;
+    document.getElementById('bs-crit').textContent=counts.crit;
+    document.getElementById('bs-cas').textContent=counts.cas;
+    i++;
+    setTimeout(add, reduced?0:340);
+  }
+  add();
+}
+var bio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ runBom(); bio.unobserve(e.target);} }); },{threshold:.3});
+bio.observe(document.getElementById('bomrows'));
+
+/* ---------- DPP meter ---------- */
+var dio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('vis'); dio.unobserve(e.target);} }); },{threshold:.5});
+dio.observe(document.getElementById('dppmeter'));
+
+})();
+</script>
+</body>
+</html>
