@@ -7,7 +7,7 @@
       "headers": [
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.eco360.ai; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:"
+          "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self' https://api.eco360.ai https://eco360-platform-api.onrender.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self' mailto:"
         },
         {
           "key": "X-Content-Type-Options",

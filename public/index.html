@@ -575,22 +575,13 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
           <h3>Device lookup</h3>
           <p style="font-size:14.5px;color:var(--dim);margin-top:8px">Pick a model and configuration. The resolver walks the cascade T1→T5 and returns the best evidence available — labelled as exactly what it is.</p>
           <div class="lk-search">
-            <select id="devsel" aria-label="Choose a demo device">
-              <option value="ip14p">Apple iPhone 14 Pro · 256 GB</option>
-              <option value="mba">Apple MacBook Air M1 · 512 GB</option>
-              <option value="galaxy">Samsung Galaxy S23 · 256 GB</option>
-              <option value="unknown">Unbranded tablet · 10″ (unknown model)</option>
+            <select id="devsel" aria-label="Choose a device">
+              <option value="">Loading devices…</option>
             </select>
             <button type="button" class="btn primary" id="devgo">Resolve</button>
           </div>
-          <div class="demochips">
-            <span class="chip" data-dev="ip14p">iPhone 14 Pro</span>
-            <span class="chip" data-dev="mba">MacBook Air M1</span>
-            <span class="chip" data-dev="galaxy">Galaxy S23</span>
-            <span class="chip" data-dev="unknown">Unknown device</span>
-          </div>
-          <p class="demonote">⚠ Demo data for illustration. Production figures are served from the live database with per-record sources.
-          <!-- DEMO DATA: replace with live API (GET /v1/devices/{id}/carbon) in phase 2 — see Jorma guide §3 --></p>
+          <div class="demochips" id="devchips"></div>
+          <p class="demonote">Live data from the ECO360 Platform database — human-approved, sourced from manufacturer Product Environmental Reports.</p>
         </div>
         <div class="dcard" id="dcard" aria-live="polite">
           <!-- filled by JS -->
@@ -1027,49 +1018,81 @@ function tick(){
 }
 tick(); setInterval(tick,1000);
 
-/* ---------- device lookup demo ----------
-   DEMO DATA — phase 2 replaces this object with
-   GET api.eco360.ai/v1/devices/{id}/carbon  (see Jorma guide §3)
-   Manufacturing figures: Apple / Samsung published PER values are indicative here.
-   UNVERIFIED CLAIMS: verify every figure against the named source before publishing. */
-var DB={
-  ip14p:{model:'Apple iPhone 14 Pro',conf:'256 GB · resolved at T1',total:78,
-    rows:[['Manufacturing',66,'meas','Measured ±20%'],['Transport',2,'meas','Measured ±20%'],['Use · 4 yr · FI grid',7,'der','Derived ±35%'],['End of life',3,'der','Derived ±35%']],
-    src:'Manufacturing & transport: Apple Product Environmental Report 09/2022 · Use: 12 kWh/yr × FI 72 g/kWh · Method & uncertainty: <a href="#tiers">tier system</a>'},
-  mba:{model:'Apple MacBook Air M1',conf:'512 GB · resolved at T2 (nearest configuration)',total:181,
-    rows:[['Manufacturing',155,'meas','Measured ±30%'],['Transport',9,'meas','Measured ±30%'],['Use · 4 yr · FI grid',12,'der','Derived ±35%'],['End of life',5,'der','Derived ±35%']],
-    src:'Apple PER, adjusted from nearest published configuration · Use: 30 kWh/yr × FI 72 g/kWh'},
-  galaxy:{model:'Samsung Galaxy S23',conf:'256 GB · resolved at T1',total:70,
-    rows:[['Manufacturing',59,'meas','Measured ±20%'],['Transport',3,'meas','Measured ±20%'],['Use · 4 yr · FI grid',5,'der','Derived ±35%'],['End of life',3,'der','Derived ±35%']],
-    src:'Samsung product environmental data · Use: 9 kWh/yr × FI 72 g/kWh'},
-  unknown:{model:'Unbranded tablet · 10″',conf:'model not identified · resolved at T5 (category average)',total:87,
-    rows:[['Manufacturing',68,'est','Estimated ±70%'],['Transport',4,'est','Estimated ±70%'],['Use · 4 yr · FI grid',10,'est','Estimated ±70%'],['End of life',5,'est','Estimated ±70%']],
-    src:'Category average for 10″ tablets — clearly labelled as an estimate. This is what honesty looks like when the data runs out.'}
-};
-var tierClass={meas:'meas',der:'der',est:'est'};
-function renderDevice(key){
-  var d=DB[key]; if(!d) return;
+/* ---------- device lookup — live data from ECO360 Platform API ---------- */
+var API_BASE='https://eco360-platform-api.onrender.com';
+var tierCls={Measured:'meas',Derived:'der',Estimated:'est'};
+var tierLbl={Measured:'Measured ±20%',Derived:'Derived ±35%',Estimated:'Estimated ±70%'};
+var segCls=['m','t','u','e'];
+
+function renderCo2(d){
   var card=document.getElementById('dcard');
-  var maxSeg=d.rows.reduce(function(a,r){return a+r[1];},0);
-  var segCls=['m','t','u','e'];
-  var html='<div class="dmodel">'+d.model+'</div><div class="dconf">'+d.conf+'</div>'+
-    '<div class="dtotal"><b>'+d.total+'</b><span>kg CO₂e · cradle-to-grave</span></div>'+
-    '<div class="dbar">'+d.rows.map(function(r,i){return '<i class="'+segCls[i]+'" style="width:0" data-w="'+(r[1]/maxSeg*100)+'"></i>';}).join('')+'</div>'+
+  var rows=[
+    ['Manufacturing',d.co2_manufacturing_kg,d.co2_manufacturing_kg_tier],
+    ['Transport',d.co2_transport_kg,d.co2_transport_kg_tier],
+    ['Use phase',d.co2_use_kg,d.co2_use_kg_tier],
+    ['End of life',d.co2_eol_kg,d.co2_eol_kg_tier]
+  ].filter(function(r){return r[1]!=null;});
+  var conf=(d.storage_gb?d.storage_gb+' GB · ':'')+('ISO 14067'+(d.methodology&&d.methodology!=='ISO 14067'?' / '+d.methodology:''))+' · T1 Measured';
+  var maxSeg=rows.reduce(function(a,r){return a+r[1];},0)||1;
+  var html='<div class="dmodel">'+d.brand+' '+d.model_name+'</div>'+
+    '<div class="dconf">'+conf+'</div>'+
+    '<div class="dtotal"><b>'+Math.round(d.co2_total_kg)+'</b><span>kg CO₂e · cradle-to-grave</span></div>'+
+    '<div class="dbar">'+rows.map(function(r,i){return '<i class="'+segCls[i]+'" style="width:0" data-w="'+(r[1]/maxSeg*100)+'"></i>';}).join('')+'</div>'+
     '<div class="dlegend"><span><i style="background:var(--green)"></i>Manufacturing</span><span><i style="background:var(--teal)"></i>Transport</span><span><i style="background:#7FB6E0"></i>Use</span><span><i style="background:#5E7186"></i>End of life</span></div>'+
-    '<div class="drows">'+d.rows.map(function(r){
-      return '<div class="drow"><span class="ph">'+r[0]+'</span><span class="val">'+r[1]+' kg</span><span class="tier '+tierClass[r[2]]+'">'+r[3]+'</span></div>';
+    '<div class="drows">'+rows.map(function(r){
+      return '<div class="drow"><span class="ph">'+r[0]+'</span><span class="val">'+Math.round(r[1])+' kg</span><span class="tier '+(tierCls[r[2]]||'meas')+'">'+(tierLbl[r[2]]||r[2])+'</span></div>';
     }).join('')+'</div>'+
-    '<div class="dsource">Source: '+d.src+'</div>';
+    '<div class="dsource">Source: '+(d.source_label||'ECO360 Platform database')+'</div>';
   card.innerHTML=html;
-  requestAnimationFrame(function(){ requestAnimationFrame(function(){
-    card.querySelectorAll('.dbar i').forEach(function(i){ i.style.width=i.dataset.w+'%'; });
+  requestAnimationFrame(function(){requestAnimationFrame(function(){
+    card.querySelectorAll('.dbar i').forEach(function(i){i.style.width=i.dataset.w+'%';});
   });});
 }
-document.getElementById('devgo').addEventListener('click',function(){ renderDevice(document.getElementById('devsel').value); });
-document.getElementById('devsel').addEventListener('change',function(){ renderDevice(this.value); });
-document.querySelectorAll('.chip').forEach(function(c){ c.addEventListener('click',function(){
-  document.getElementById('devsel').value=c.dataset.dev; renderDevice(c.dataset.dev); }); });
-renderDevice('ip14p');
+
+function showCardError(msg){
+  document.getElementById('dcard').innerHTML='<div style="padding:40px;text-align:center;color:var(--dim)">'+(msg||'Unable to load data')+'</div>';
+}
+
+function selectDevice(modelId){
+  if(!modelId)return;
+  document.getElementById('devsel').value=modelId;
+  document.getElementById('dcard').innerHTML='<div style="padding:40px;text-align:center;color:var(--dim)">Loading…</div>';
+  fetch(API_BASE+'/v1/public/devices/'+encodeURIComponent(modelId)+'/co2')
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+    .then(function(d){renderCo2(d);})
+    .catch(function(){showCardError('Unable to load device data. Please try again.');});
+}
+
+function loadDeviceList(){
+  fetch(API_BASE+'/v1/public/devices')
+    .then(function(r){if(!r.ok)throw new Error(r.status);return r.json();})
+    .then(function(devices){
+      if(!devices||!devices.length){showCardError('No device data available.');return;}
+      var sel=document.getElementById('devsel');
+      sel.innerHTML='';
+      devices.forEach(function(d){
+        var opt=document.createElement('option');
+        opt.value=d.model_id;
+        opt.textContent=d.brand+' '+d.model_name+(d.storage_gb?' · '+d.storage_gb+' GB':'');
+        sel.appendChild(opt);
+      });
+      var chips=document.getElementById('devchips');
+      chips.innerHTML='';
+      devices.slice(0,6).forEach(function(d){
+        var s=document.createElement('span');
+        s.className='chip';
+        s.textContent=d.model_name;
+        s.addEventListener('click',function(){selectDevice(d.model_id);});
+        chips.appendChild(s);
+      });
+      selectDevice(devices[0].model_id);
+    })
+    .catch(function(){showCardError('Unable to connect to ECO360 Platform API.');});
+}
+
+document.getElementById('devgo').addEventListener('click',function(){selectDevice(document.getElementById('devsel').value);});
+document.getElementById('devsel').addEventListener('change',function(){selectDevice(this.value);});
+loadDeviceList();
 
 /* ---------- typed API JSON ---------- */
 var apiJSON=[
