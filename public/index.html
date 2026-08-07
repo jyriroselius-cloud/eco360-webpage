@@ -377,6 +377,32 @@ nav img{height:30px;display:block}
 .ghgrow.total{background:rgba(91,212,105,.05)}
 .ghgrow.total .cat,.ghgrow.total .num{color:var(--green);font-weight:700}
 .ghgrow .cmp{font-size:12px;color:var(--teal);min-width:60px;text-align:right}
+/* ---------------- widget section ---------------- */
+.wgrid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center;margin-top:48px}
+.wcode{background:#081018;border:1px solid var(--line);border-radius:20px;padding:28px 30px;font:13.5px/1.9 ui-monospace,SFMono-Regular,Menlo,monospace;color:#B9CBDD;overflow-x:auto;white-space:pre}
+.wcode .k{color:#7FB6E0}.wcode .s{color:var(--green2)}.wcode .c{color:var(--dim2)}.wcode .a{color:var(--teal)}
+.wmodes{display:flex;gap:10px;margin-top:20px;flex-wrap:wrap}
+.wmode{font-size:12.5px;border:1px solid var(--line);border-radius:100px;padding:5px 14px;color:var(--dim);cursor:pointer;transition:border-color .2s,color .2s}
+.wmode.on{border-color:var(--green-d);color:var(--green)}
+.wpreview{background:var(--panel);border:1px solid var(--line);border-radius:20px;padding:28px;display:flex;flex-direction:column;gap:0}
+.wcard-label{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.wcard-name{font-size:16px;font-weight:700;margin-bottom:18px;color:var(--white)}
+.wcard-row{display:flex;justify-content:space-between;align-items:baseline;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);font-size:13.5px}
+.wcard-row:last-child{border-bottom:none}
+.wcard-row .wlabel{color:var(--dim)}
+.wcard-row .wval{font-weight:600;color:var(--white)}
+.wcard-row .wtier{font-size:11px;color:var(--teal);margin-left:8px}
+.wcard-co2{display:flex;align-items:baseline;gap:8px;padding:16px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.wcard-co2 b{font-size:36px;font-weight:800;color:var(--white);line-height:1}
+.wcard-co2 span{font-size:13px;color:var(--dim)}
+.wcard-bar{display:flex;height:6px;border-radius:3px;overflow:hidden;margin:14px 0 6px;gap:2px}
+.wcard-bar i{border-radius:3px;display:block}
+.wcard-powered{font-size:11px;color:var(--dim2);margin-top:14px;text-align:right}
+.wcard-powered a{color:var(--dim2);text-decoration:none}
+.wbullets{list-style:none;margin-top:28px;display:flex;flex-direction:column;gap:12px}
+.wbullets li{font-size:15px;color:var(--dim);padding-left:24px;position:relative}
+.wbullets li::before{content:"→";position:absolute;left:0;color:var(--green)}
+@media(max-width:900px){.wgrid{grid-template-columns:1fr}}
 /* ---------------- pricing ---------------- */
 .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:56px}
 .plan{background:var(--panel);border:1px solid var(--line);border-radius:26px;padding:40px 34px;display:flex;flex-direction:column;position:relative;
@@ -456,6 +482,7 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
       <a href="#platform">Platform</a>
       <a href="#bom">Compliance</a>
       <a href="#dpp">DPP</a>
+      <a href="#widget">Widget</a>
       <a class="ncta" href="#contact">Book a demo</a>
     </div>
   </div>
@@ -821,6 +848,56 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
   </div>
 </section>
 
+<!-- ================= WIDGET ================= -->
+<section id="widget" style="padding-top:40px">
+  <div class="wrap">
+    <div class="sechead rv">
+      <span class="eyebrow">Shopfront integration</span>
+      <h2>Add a live CO₂ card to<br>any <span class="gr">product page</span>.</h2>
+      <p class="lede">One HTML tag. The widget fetches live data from ECO360, renders a verified product card with carbon, repairability and compliance status, and updates automatically when your data changes — no store rebuild required.</p>
+    </div>
+    <div class="wgrid">
+      <div class="rv d1">
+        <div class="wcode"><span class="c">&lt;!-- Add once to your &lt;head&gt; --&gt;</span>
+<span class="k">&lt;script</span> <span class="a">src</span>=<span class="s">"https://cdn.eco360.ai/widget.js"</span><span class="k">&gt;&lt;/script&gt;</span>
+
+<span class="c">&lt;!-- Drop on any product page --&gt;</span>
+<span class="k">&lt;eco360-label</span>
+  <span class="a">gtin</span>=<span class="s">"YOUR_GTIN_HERE"</span>
+  <span class="a">api-key</span>=<span class="s">"eco_…"</span>
+  <span class="a">mode</span>=<span class="s">"card"</span><span class="k">&gt;</span>
+<span class="k">&lt;/eco360-label&gt;</span></div>
+        <ul class="wbullets rv d2">
+          <li>Three modes: <b>card</b> · <b>compact</b> · <b>badge-only</b></li>
+          <li>Shadow DOM — no CSS conflicts with your store theme</li>
+          <li>Works with Shopify, WooCommerce, and any HTML page</li>
+          <li>Data updates in ECO360 reflect instantly — no redeployment</li>
+        </ul>
+      </div>
+      <div class="wpreview rv d2">
+        <div class="wcard-label">ECO360 · Verified data</div>
+        <div class="wcard-name"><!-- PLACEHOLDER: replace with real product name --> Example Product · 256 GB</div>
+        <div class="wcard-co2">
+          <b>78</b><span>kg CO₂e · cradle-to-grave</span><!-- UNVERIFIED CLAIMS: placeholder figure -->
+        </div>
+        <div class="wcard-bar">
+          <i style="background:var(--green);width:84%"></i>
+          <i style="background:var(--teal);width:3%"></i>
+          <i style="background:#7FB6E0;width:9%"></i>
+          <i style="background:#5E7186;width:4%"></i>
+        </div>
+        <div style="display:flex;gap:16px;font-size:11.5px;color:var(--dim2);margin-bottom:6px">
+          <span>Manufacturing</span><span>Transport</span><span>Use</span><span>EOL</span>
+        </div>
+        <div class="wcard-row"><span class="wlabel">Repairability score</span><span><span class="wval">7.8 / 10</span><span class="wtier">Derived</span></span></div><!-- UNVERIFIED CLAIMS -->
+        <div class="wcard-row"><span class="wlabel">Spare parts available</span><span><span class="wval">7 years</span><span class="wtier">Measured</span></span></div><!-- UNVERIFIED CLAIMS -->
+        <div class="wcard-row"><span class="wlabel">SVHC substances</span><span><span class="wval">None detected</span><span class="wtier">Derived</span></span></div><!-- UNVERIFIED CLAIMS -->
+        <div class="wcard-powered">Verified by <a href="https://eco360.ai">ECO360</a> · <a href="#">View full data</a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= GHG ================= -->
 <section id="ghg" style="padding-top:40px">
   <div class="wrap">
@@ -912,7 +989,7 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
       </div>
       <div>
         <h3>Platform</h3>
-        <ul><li><a href="#lookup">Device data</a></li><li><a href="#platform">Data API</a></li><li><a href="#bom">BoM screening</a></li><li><a href="#dpp">Digital Product Passport</a></li><li><a href="#ghg">GHG reporting</a></li></ul>
+        <ul><li><a href="#lookup">Device data</a></li><li><a href="#platform">Data API</a></li><li><a href="#bom">BoM screening</a></li><li><a href="#dpp">Digital Product Passport</a></li><li><a href="#widget">Widget</a></li><li><a href="#ghg">GHG reporting</a></li></ul>
       </div>
       <div>
         <h3>Company</h3>
