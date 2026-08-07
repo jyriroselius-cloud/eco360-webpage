@@ -456,7 +456,6 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
       <a href="#platform">Platform</a>
       <a href="#bom">Compliance</a>
       <a href="#dpp">DPP</a>
-      <a href="#pricing">Pricing</a>
       <a class="ncta" href="#contact">Book a demo</a>
     </div>
   </div>
@@ -690,10 +689,6 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
       </div>
     </div>
 
-    <div class="apiwin rv" id="apiwin">
-      <div class="apibar"><i></i><i></i><i></i><span class="lbl">GET api.eco360.ai/v1/devices/iphone-14-pro-256/carbon?country=FI</span></div>
-      <div class="apicode" id="apicode"></div>
-    </div>
   </div>
 </section>
 
@@ -850,60 +845,6 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
   </div>
 </section>
 
-<!-- ================= PRICING ================= -->
-<section id="pricing" style="padding-top:40px">
-  <div class="wrap">
-    <div class="sechead rv">
-      <span class="eyebrow t">Pricing — published, on purpose</span>
-      <h2>No "request a quote"<br><span class="gr">theatre</span>.</h2>
-      <p class="lede">In a market where nearly every vendor hides its prices, a published price list is a feature. Annual subscription, high-touch onboarding included.</p>
-    </div>
-    <div class="plans">
-      <!-- PLACEHOLDER FIGURES: prices from pitch deck June 2026 — confirm current list before publishing -->
-      <div class="plan rv">
-        <h3>Starter</h3>
-        <div class="price"><b>€5,700</b><span>/ year</span></div>
-        <p class="pdesc">For a single catalogue and your first compliant carbon claims.</p>
-        <ul>
-          <li>Console + 1 product catalogue</li>
-          <li>Product CO₂ lookups with tier &amp; source</li>
-          <li>Embeddable product-card widget</li>
-          <li>Email support</li>
-        </ul>
-        <a class="btn ghost" href="#contact">Start here</a>
-      </div>
-      <div class="plan hot rv d1">
-        <span class="pop">Most chosen</span>
-        <h3>Growth</h3>
-        <div class="price"><b>€9,120</b><span>/ year</span></div>
-        <p class="pdesc">For teams answering customer questionnaires and building the GHG report.</p>
-        <ul>
-          <li>Everything in Starter</li>
-          <li>GHG Scope 1/2/3 report + comparison years</li>
-          <li>BoM substance screening</li>
-          <li>Inventory intelligence — 18 analyses</li>
-          <li>Priority support</li>
-        </ul>
-        <a class="btn primary" href="#contact">Book a demo</a>
-      </div>
-      <div class="plan rv d2">
-        <h3>Professional</h3>
-        <div class="price"><b>€14,820</b><span>/ year</span></div>
-        <p class="pdesc">For companies shipping passports and integrating the data downstream.</p>
-        <ul>
-          <li>Everything in Growth</li>
-          <li>Data API access</li>
-          <li>DPP pages + GS1 Digital Link</li>
-          <li>Auto-enrich from EU registries</li>
-          <li>Dedicated success manager</li>
-        </ul>
-        <a class="btn ghost" href="#contact">Talk to us</a>
-      </div>
-    </div>
-    <p class="price-note rv">High-volume API usage is priced separately by call volume — <a href="#contact" style="color:var(--teal)">ask for the API rate card</a>. Prices exclude VAT.</p>
-  </div>
-</section>
-
 <!-- ================= PARTNERS ================= -->
 <section id="partners" style="padding-top:20px;padding-bottom:60px">
   <div class="wrap">
@@ -975,7 +916,7 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
       </div>
       <div>
         <h3>Company</h3>
-        <ul><li><a href="#team">Team</a></li><li><a href="#partners">Partners</a></li><li><a href="#pricing">Pricing</a></li><li><a href="#contact">Contact</a></li></ul>
+        <ul><li><a href="#team">Team</a></li><li><a href="#partners">Partners</a></li><li><a href="#contact">Contact</a></li></ul>
       </div>
       <div>
         <h3>Legal</h3>
@@ -1107,41 +1048,6 @@ function loadDeviceList(){
 document.getElementById('devgo').addEventListener('click',function(){selectDevice(document.getElementById('devsel').value);});
 document.getElementById('devsel').addEventListener('change',function(){selectDevice(this.value);});
 loadDeviceList();
-
-/* ---------- typed API JSON ---------- */
-var apiJSON=[
-'{',
-'  <span class="k">"device"</span>: <span class="s">"Apple iPhone 14 Pro · 256 GB"</span>,',
-'  <span class="k">"resolved_at"</span>: <span class="s">"T1"</span>,',
-'  <span class="k">"carbon_kg"</span>: {',
-'    <span class="k">"manufacturing"</span>: { <span class="k">"value"</span>: <span class="n">66</span>, <span class="k">"tier"</span>: <span class="tealx">"MEASURED"</span>, <span class="k">"uncertainty"</span>: <span class="s">"±20%"</span>,',
-'      <span class="k">"source"</span>: <span class="s">"Apple Product Environmental Report 09/2022"</span> },',
-'    <span class="k">"transport"</span>:     { <span class="k">"value"</span>: <span class="n">2</span>,  <span class="k">"tier"</span>: <span class="tealx">"MEASURED"</span> },',
-'    <span class="k">"use_phase"</span>:     { <span class="k">"value"</span>: <span class="n">7</span>,  <span class="k">"tier"</span>: <span class="tealx">"DERIVED"</span>,',
-'      <span class="k">"method"</span>: <span class="s">"12 kWh/yr × FI 72 gCO₂e/kWh × 4 yr"</span> },',
-'    <span class="k">"end_of_life"</span>:   { <span class="k">"value"</span>: <span class="n">3</span>,  <span class="k">"tier"</span>: <span class="tealx">"DERIVED"</span> }',
-'  },',
-'  <span class="k">"total_kg"</span>: <span class="n">78</span>,',
-'  <span class="k">"substantiation_url"</span>: <span class="s">"https://label.eco360.ai/s/ip14p-256-fi"</span>,',
-'  <span class="k">"retrieved"</span>: <span class="s">"2026-08-06"</span>',
-'}',
-'<span class="c">// every numeric field ships with a tier — the build fails if one doesn\'t</span>'
-];
-var apicode=document.getElementById('apicode'), apiStarted=false;
-function typeAPI(){
-  if(apiStarted) return; apiStarted=true;
-  if(reduced){ apicode.innerHTML=apiJSON.join('\n'); return; }
-  var line=0;
-  apicode.innerHTML='<span class="cursor"></span>';
-  var iv=setInterval(function(){
-    if(line>=apiJSON.length){ clearInterval(iv); apicode.querySelector('.cursor').remove(); return; }
-    var cur=apicode.querySelector('.cursor');
-    var div=document.createElement('div'); div.innerHTML=apiJSON[line];
-    apicode.insertBefore(div,cur); line++;
-  },110);
-}
-var aio=new IntersectionObserver(function(es){ es.forEach(function(e){ if(e.isIntersecting){ typeAPI(); aio.unobserve(e.target);} }); },{threshold:.3});
-aio.observe(document.getElementById('apiwin'));
 
 /* ---------- use-phase calculator ---------- */
 var COUNTRIES=[['FI',72],['SE',36],['NO',31],['FR',44],['DE',344],['PL',615]];
