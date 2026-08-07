@@ -1024,6 +1024,8 @@ var tierCls={Measured:'meas',Derived:'der',Estimated:'est'};
 var tierLbl={Measured:'Measured ±20%',Derived:'Derived ±35%',Estimated:'Estimated ±70%'};
 var segCls=['m','t','u','e'];
 
+function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+
 function renderCo2(d){
   var card=document.getElementById('dcard');
   var rows=[
@@ -1032,17 +1034,18 @@ function renderCo2(d){
     ['Use phase',d.co2_use_kg,d.co2_use_kg_tier],
     ['End of life',d.co2_eol_kg,d.co2_eol_kg_tier]
   ].filter(function(r){return r[1]!=null;});
-  var conf=(d.storage_gb?d.storage_gb+' GB · ':'')+('ISO 14067'+(d.methodology&&d.methodology!=='ISO 14067'?' / '+d.methodology:''))+' · T1 Measured';
+  var methExtra=d.methodology&&d.methodology!=='ISO 14067'?' / '+esc(d.methodology):'';
+  var conf=(d.storage_gb?esc(d.storage_gb)+' GB · ':'')+('ISO 14067'+methExtra)+' · T1 Measured';
   var maxSeg=rows.reduce(function(a,r){return a+r[1];},0)||1;
-  var html='<div class="dmodel">'+d.brand+' '+d.model_name+'</div>'+
+  var html='<div class="dmodel">'+esc(d.brand)+' '+esc(d.model_name)+'</div>'+
     '<div class="dconf">'+conf+'</div>'+
     '<div class="dtotal"><b>'+Math.round(d.co2_total_kg)+'</b><span>kg CO₂e · cradle-to-grave</span></div>'+
     '<div class="dbar">'+rows.map(function(r,i){return '<i class="'+segCls[i]+'" style="width:0" data-w="'+(r[1]/maxSeg*100)+'"></i>';}).join('')+'</div>'+
     '<div class="dlegend"><span><i style="background:var(--green)"></i>Manufacturing</span><span><i style="background:var(--teal)"></i>Transport</span><span><i style="background:#7FB6E0"></i>Use</span><span><i style="background:#5E7186"></i>End of life</span></div>'+
     '<div class="drows">'+rows.map(function(r){
-      return '<div class="drow"><span class="ph">'+r[0]+'</span><span class="val">'+Math.round(r[1])+' kg</span><span class="tier '+(tierCls[r[2]]||'meas')+'">'+(tierLbl[r[2]]||r[2])+'</span></div>';
+      return '<div class="drow"><span class="ph">'+r[0]+'</span><span class="val">'+Math.round(r[1])+' kg</span><span class="tier '+(tierCls[r[2]]||'meas')+'">'+(tierLbl[r[2]]||'')+'</span></div>';
     }).join('')+'</div>'+
-    '<div class="dsource">Source: '+(d.source_label||'ECO360 Platform database')+'</div>';
+    '<div class="dsource">Source: '+esc(d.source_label||'ECO360 Platform database')+'</div>';
   card.innerHTML=html;
   requestAnimationFrame(function(){requestAnimationFrame(function(){
     card.querySelectorAll('.dbar i').forEach(function(i){i.style.width=i.dataset.w+'%';});
