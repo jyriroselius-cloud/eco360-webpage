@@ -1,5 +1,27 @@
 # Changelog — eco360-webpage
 
+## [1.1.0] — 2026-08-18
+
+### Stats row correction (backlog #65)
+
+**Problem:** Three of four hero stats were wrong.
+- `100,000+` devices: overstated by >10× (actual universe ~4 000–5 000 PCF documents, DB has 10)
+- `452+` categories: stale (actual: 536 via `SELECT COUNT(*) FROM eco_product_categories`)
+- `46` electricity grids: off by one (actual: 47 distinct countries with `valid_to IS NULL`)
+- `100% of figures carry a tier and a source`: source coverage unverifiable (0 label snapshots; `co2_manufacture_source_url` nullable)
+
+**Changes to stats row:**
+- Tile 1: replaced `100,000+ devices in the CO₂ database` with `EPREL · SCIP · Ember / EU registries the engine reads directly — not data you type in` (no numeral)
+- Tile 2: corrected `452+` → `536+` product categories
+- Tile 3: corrected `46` → `47` national electricity grids
+- Tile 4: narrowed to `100% of figures carry a tier` (removed "and a source" — unverifiable)
+
+**Step 4 sweep:** Only one occurrence of `100000` found in the repo — the corrected stat tile. No occurrences in meta, OG tags, sitemap, or any other file.
+
+**Step 3 — drift prevention:** Added `tests/stats.test.js` (4 tests) that ties HTML `data-count` values to verified constants with inline SQL queries and dates. Any HTML edit to those values now trips the test suite.
+
+**Tests:** 35 → 39 (+4 stats integrity tests)
+
 ## [1.0.0] — 2026-08-06
 
 ### Phase 1 — Static site deploy (Wix migration)
