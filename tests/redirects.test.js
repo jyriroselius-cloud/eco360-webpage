@@ -23,6 +23,12 @@ describe('301/308 redirects from Wix-era paths', () => {
     expect(r.location).toContain('/#platform');
   });
 
+  it('/eco360platform → /#platform (#223)', async () => {
+    const r = await getRedirect('/eco360platform');
+    expect(r.status).toBe(308);
+    expect(r.location).toContain('/#platform');
+  });
+
   it('/about → /#team', async () => {
     const r = await getRedirect('/about');
     expect(r.status).toBe(308);

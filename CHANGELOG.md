@@ -1,5 +1,29 @@
 # Changelog — eco360-webpage
 
+## [1.3.0] — 2026-08-26
+
+### BoM copy accuracy + capability test + /eco360platform redirect (#223)
+
+**Background:** ALL_THEMES in eco360-platform compliance.py is `pfas, svhc, rohs, tsca, prop65`. The page
+claimed `RoHS, REACH, POPs and UK REACH` — two regulations the engine does not handle (POPs, UK REACH)
+and two it handles as `not_applicable` for EEA-market products (TSCA, Prop 65). PFAS (78% §7 agreement)
+was entirely absent from the copy.
+
+**Changes:**
+- `public/index.html:791`: "screens every article against RoHS, REACH, POPs and UK REACH" →
+  "assesses every article for PFAS, REACH SVHC and RoHS. TSCA and Prop 65 are in scope; for
+  EEA-market products they return not_applicable."
+- `public/llms.txt:9`: "screening for RoHS, REACH and POPs" → "screening for PFAS, REACH SVHC
+  and RoHS (TSCA and Prop 65 in scope; not_applicable for EEA-market products)"
+- `vercel.json`: added redirect `/eco360platform → /#platform` (permanent 308). Fragment `#platform`
+  exists in index.html — passes the redirect-fragment-resolves-to-an-id test from #215.
+- `tests/compliance_copy.test.js` (new): capability-accuracy test — every regulation named in
+  marketing copy and llms.txt must appear in ASSESSED, NOT_APPLICABLE_EEA, or EU_FRAMEWORKS.
+  Catches future POPs/UK REACH drift without touching the vocabulary test.
+- `tests/redirects.test.js`: added live test case for `/eco360platform → /#platform`.
+
+**Tests:** 41 → 43 (+2: BoM regulation accuracy ×2 in compliance_copy.test.js)
+
 ## [1.2.0] — 2026-08-26
 
 ### SEO head audit — tier-only copy (#214) + offers removal (#216)

@@ -38,6 +38,7 @@
   ],
   "redirects": [
     { "source": "/platform",          "destination": "/#platform",  "permanent": true },
+    { "source": "/eco360platform",    "destination": "/#platform",  "permanent": true },
     { "source": "/solutions",         "destination": "/#platform",  "permanent": true },
     { "source": "/about",             "destination": "/#team",      "permanent": true },
     { "source": "/about-us",          "destination": "/#team",      "permanent": true },

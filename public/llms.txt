@@ -6,7 +6,7 @@
 
 ## What ECO360 does
 - Product carbon footprints at model level, with the calculation tier stated
-- Bill-of-materials screening for RoHS, REACH and POPs
+- Bill-of-materials screening for PFAS, REACH SVHC and RoHS (TSCA and Prop 65 in scope; not_applicable for EEA-market products)
 - Digital Product Passport data
 - GHG Scope 1/2/3 reporting from the same loaded data
 - Delivered as an API, a console, an embeddable product card, or an agent
