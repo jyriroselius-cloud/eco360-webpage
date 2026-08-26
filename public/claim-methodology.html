@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claim Methodology · ECO360</title>
+  <meta name="description" content="How ECO360 calculates CO₂ figures — tier system, emission factors, uncertainty bounds and reproducibility.">
+  <link rel="canonical" href="https://eco360.ai/claim-methodology">
+  <meta name="robots" content="index,follow">
+  <style>
+    :root{--bg:#09090b;--fg:#f4f4f5;--dim:#a1a1aa;--line:#27272a;--accent:#34d399;font-family:system-ui,-apple-system,sans-serif}
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{background:var(--bg);color:var(--fg);line-height:1.65;padding:0 16px}
+    a{color:var(--accent);text-decoration:none}
+    a:hover{text-decoration:underline}
+    .wrap{max-width:760px;margin:0 auto;padding:64px 0 96px}
+    header{margin-bottom:48px}
+    header a{font-size:13px;color:var(--dim)}
+    h1{font-size:28px;font-weight:700;margin-top:16px;margin-bottom:8px}
+    .meta{font-size:13px;color:var(--dim);margin-bottom:40px}
+    h2{font-size:17px;font-weight:600;margin-top:44px;margin-bottom:12px;padding-bottom:8px;border-bottom:1px solid var(--line)}
+    h3{font-size:14px;font-weight:600;margin-top:24px;margin-bottom:8px;color:var(--fg)}
+    p{margin-bottom:14px;color:#d4d4d8}
+    ul{margin:0 0 14px 20px;color:#d4d4d8}
+    li{margin-bottom:6px}
+    table{width:100%;border-collapse:collapse;margin-bottom:20px;font-size:13.5px}
+    th{text-align:left;padding:8px 12px;background:#18181b;color:var(--dim);font-weight:600;font-size:11px;letter-spacing:.08em;text-transform:uppercase;border-bottom:1px solid var(--line)}
+    td{padding:8px 12px;border-bottom:1px solid #1f1f23;color:#d4d4d8;vertical-align:top}
+    .badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 7px;border-radius:4px}
+    .m{background:#052e16;color:#34d399}
+    .d{background:#1e3a5f;color:#60a5fa}
+    .e{background:#2d1f0e;color:#fb923c}
+    .callout{background:#111113;border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:6px;padding:14px 16px;margin:20px 0;font-size:14px;color:#d4d4d8}
+  </style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a href="/">← ECO360</a>
+    <h1>Claim Methodology</h1>
+    <p class="meta">Version 1.0 · Published 1 August 2026 · EcoGreen360 Oy</p>
+  </header>
+
+  <div class="callout">Every figure ECO360 produces is labelled with the method that produced it — <span class="badge m">Measured</span>, <span class="badge d">Derived</span> or <span class="badge e">Estimated</span> — and with the data source or factor set used. This page explains what those labels mean and how the calculations work.</div>
+
+  <h2>1. The three-tier system</h2>
+  <p>Every CO₂ figure carries exactly one tier label. A figure can only carry the tier of its weakest input — a Measured primary emission calculated using a grid factor that is Derived produces a Derived result, not a Measured one.</p>
+
+  <table>
+    <thead><tr><th>Tier</th><th>What it means</th><th>Typical source</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><span class="badge m">Measured</span></td>
+        <td>Based on a supplier-submitted or manufacturer-published Product Carbon Footprint (PCF) document, verified for method and version.</td>
+        <td>Apple Environmental Progress Report, Dell Product Carbon Footprint, manufacturer PCF database</td>
+      </tr>
+      <tr>
+        <td><span class="badge d">Derived</span></td>
+        <td>Calculated from a primary activity figure (kWh, km, kg of material) using a published emission factor. The factor version and source are recorded at calculation time.</td>
+        <td>IEA World Energy Outlook electricity factors, AIB European Residual Mixes, EU EF 3.1 material factors</td>
+      </tr>
+      <tr>
+        <td><span class="badge e">Estimated</span></td>
+        <td>Produced by the mass-estimation cascade when primary data is unavailable — a statistical proxy drawn from products in the same item-group or HS code class. Carries the widest uncertainty band.</td>
+        <td>ECO360 internal product database, median mass by item group</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2>2. Uncertainty bounds</h2>
+  <p>Every figure carries a P5–P95 uncertainty interval, not a point estimate. We do not report uncertainty narrower than ±20 % (1σ) at any tier — this matches the MIT PAIA model used by Dell, HP and Lenovo for their own published PCF numbers, whose P5–P95 spread on a single laptop model is approximately 3.5×.</p>
+
+  <table>
+    <thead><tr><th>Tier</th><th>Minimum σ (relative)</th><th>Source of additional uncertainty</th></tr></thead>
+    <tbody>
+      <tr><td><span class="badge m">Measured</span></td><td>±5 %</td><td>Manufacturer methodology variation, functional unit boundaries</td></tr>
+      <tr><td><span class="badge d">Derived</span></td><td>±15 %</td><td>Factor vintage, grid mix vs. residual mix, mass estimation error</td></tr>
+      <tr><td><span class="badge e">Estimated</span></td><td>±30 %</td><td>Mass proxy accuracy, item-group heterogeneity, factor applicability</td></tr>
+    </tbody>
+  </table>
+
+  <p>Uncertainty contributions from independent sources are combined in quadrature: σ_total = √(σ_factor² + σ_mass²).</p>
+
+  <h2>3. Emission factor sources</h2>
+  <p>Factors are versioned and dated. A calculation result records the factor set version used at the time of calculation. Factors are never back-applied to existing results when a new version is published.</p>
+
+  <table>
+    <thead><tr><th>Factor type</th><th>Source</th><th>Version / vintage</th></tr></thead>
+    <tbody>
+      <tr><td>Electricity — market-based</td><td>Association of Issuing Bodies (AIB) European Residual Mixes</td><td>AIB ERMs 2023, 2024, 2025</td></tr>
+      <tr><td>Electricity — location-based</td><td>IEA World Energy Outlook</td><td>IEA WEO 2024</td></tr>
+      <tr><td>Material — EU average</td><td>EU Environmental Footprint 3.1 (JRC / EC)</td><td>EF-3.1-2024</td></tr>
+      <tr><td>Fuel combustion</td><td>IPCC 2019 Guidelines for National Greenhouse Gas Inventories</td><td>IPCC 2019 global</td></tr>
+      <tr><td>Device CO₂ — Measured</td><td>Manufacturer published PCF documents (Apple, Dell, HP, Lenovo)</td><td>Per-document version and publication date</td></tr>
+    </tbody>
+  </table>
+
+  <h2>4. Scope boundary</h2>
+  <p>Unless stated otherwise, a device CO₂ figure covers <strong>cradle-to-gate manufacturing</strong> (Scope 3, Category 1: purchased goods and services). Use-phase electricity consumption is calculated separately and reported as Scope 2 when a grid factor is available. End-of-life (Category 12) is reported separately using Eurostat EU-average treatment shares when primary data is absent.</p>
+
+  <p>We do not aggregate Scope 1, 2 and 3 into a single number. A single-number "carbon footprint" across all three scopes combines quantities that are typically double-counted in supply chains and should not be summed without an explicit methodology statement naming the double-counting convention used.</p>
+
+  <h2>5. Reproducibility</h2>
+  <p>Every workbook produced by the ECO360 pipeline records:</p>
+  <ul>
+    <li>A unique run ID</li>
+    <li>The factor set version used at calculation time</li>
+    <li>The source profile version (column mapping and sentinel conventions)</li>
+    <li>A SHA-256 hash of the input file</li>
+    <li>The as-of date for all time-dependent lookups (grid factors, substance lists)</li>
+  </ul>
+  <p>Given the same input file and factor set version, the ECO360 engine produces bit-identical output. This is verified by an automated reproducibility test that is part of the CI suite on every code change.</p>
+
+  <h2>6. Claims we do not make</h2>
+  <ul>
+    <li>We do not describe any product as "sustainable", "green" or "eco-friendly" — these are unsubstantiated claims under EU Directive 2024/825/EU (Green Claims Directive). We report numbers; we do not assign rankings.</li>
+    <li>We do not use percentage comparisons ("X% less CO₂") without naming the reference product, its CO₂ figure, and its tier — comparisons between figures at different tiers are not published.</li>
+    <li>We do not issue regulatory clearance for REACH, RoHS, TSCA or Prop 65. A legal determination of conformity with those regulations requires a qualified person with full access to the Bill of Materials. Our substance screening identifies risk — it does not establish legal status.</li>
+  </ul>
+
+  <h2>7. Updates and corrections</h2>
+  <p>When an error is found in a published figure, we:</p>
+  <ul>
+    <li>Publish the corrected value with the correction date and a description of what changed</li>
+    <li>Retain the original value in the calculation history with a correction note</li>
+    <li>Do not silently overwrite historical results</li>
+  </ul>
+  <p>To report a potential error, email <a href="mailto:data@eco360.ai">data@eco360.ai</a> with the product name, the figure in question, and the source you believe is more accurate.</p>
+
+  <p style="margin-top:44px;font-size:13px;color:var(--dim)">Version 1.0 · EcoGreen360 Oy · Business ID 3489696-8 · <a href="/">Return to eco360.ai</a></p>
+</div>
+</body>
+</html>

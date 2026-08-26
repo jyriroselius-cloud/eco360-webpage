@@ -1,5 +1,16 @@
 # Changelog — eco360-webpage
 
+## [1.4.0] — 2026-08-26
+
+### Legal pages + footer identity (#222)
+
+- `public/privacy.html` — GDPR Art. 13–14 privacy notice (data controller, retention, rights, supervisory authority)
+- `public/terms.html` — Terms of use (permitted use, IP, limitation of liability, governing law: Finland)
+- `public/claim-methodology.html` — Claim methodology: three-tier system (Measured/Derived/Estimated), uncertainty bounds (≥±20% floor), emission factor sources and versions, scope boundary, reproducibility record, claims not made
+- `index.html` footer: dead links `/privacy`, `/terms`, `/claim-methodology` replace `href="#"` placeholders
+- `index.html` footer: company identity line — "EcoGreen360 Oy · Business ID 3489696-8 · VAT FI34896968 · Finland" replaces COMPANY INFO GATE comment
+- +13 tests (58 total): footer link validity, Y-tunnus presence, legal page existence + canonical + back-link + identity + tier explanation + forbidden-word guard
+
 ## [1.3.0] — 2026-08-26
 
 ### BoM copy accuracy + capability test + /eco360platform redirect (#223)

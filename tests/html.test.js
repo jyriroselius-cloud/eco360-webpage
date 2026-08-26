@@ -102,4 +102,65 @@ describe('HTML structure', () => {
     }
     expect(errors).toHaveLength(0);
   });
+
+  it('footer legal links are not placeholder #-hrefs', () => {
+    const footerMatch = html.match(/<footer[\s\S]*?<\/footer>/i);
+    expect(footerMatch).not.toBeNull();
+    const footer = footerMatch[0];
+    expect(footer).toContain('href="/privacy"');
+    expect(footer).toContain('href="/terms"');
+    expect(footer).toContain('href="/claim-methodology"');
+    expect(footer).not.toMatch(/href="#"[\s\S]{0,20}Privacy/);
+    expect(footer).not.toMatch(/href="#"[\s\S]{0,20}Terms/);
+    expect(footer).not.toMatch(/href="#"[\s\S]{0,20}Claim/);
+  });
+
+  it('footer contains company identity (Y-tunnus and VAT)', () => {
+    const footerMatch = html.match(/<footer[\s\S]*?<\/footer>/i);
+    expect(footerMatch).not.toBeNull();
+    const footer = footerMatch[0];
+    expect(footer).toContain('3489696-8');
+    expect(footer).toContain('FI34896968');
+    expect(footer).not.toContain('COMPANY INFO GATE');
+  });
+});
+
+describe('legal pages', () => {
+  const pages = [
+    { name: 'privacy', path: 'public/privacy.html', canonical: '/privacy' },
+    { name: 'terms', path: 'public/terms.html', canonical: '/terms' },
+    { name: 'claim-methodology', path: 'public/claim-methodology.html', canonical: '/claim-methodology' },
+  ];
+
+  for (const page of pages) {
+    it(`${page.name}.html exists and has correct canonical`, () => {
+      const content = readFileSync(resolve(process.cwd(), page.path), 'utf8');
+      expect(content).toContain(`href="https://eco360.ai${page.canonical}"`);
+    });
+
+    it(`${page.name}.html links back to eco360.ai`, () => {
+      const content = readFileSync(resolve(process.cwd(), page.path), 'utf8');
+      expect(content).toContain('href="/');
+    });
+
+    it(`${page.name}.html contains EcoGreen360 Oy identity`, () => {
+      const content = readFileSync(resolve(process.cwd(), page.path), 'utf8');
+      expect(content).toContain('EcoGreen360 Oy');
+      expect(content).toContain('3489696-8');
+    });
+  }
+
+  it('claim-methodology.html explains the three tiers', () => {
+    const content = readFileSync(resolve(process.cwd(), 'public/claim-methodology.html'), 'utf8');
+    expect(content).toContain('Measured');
+    expect(content).toContain('Derived');
+    expect(content).toContain('Estimated');
+  });
+
+  it('claim-methodology.html does not use forbidden compliance words', () => {
+    const content = readFileSync(resolve(process.cwd(), 'public/claim-methodology.html'), 'utf8');
+    // these words in a claim-context context are forbidden per spec
+    expect(content).not.toMatch(/\bcompliant\b/i);
+    expect(content).not.toMatch(/\bconforms\b/i);
+  });
 });
