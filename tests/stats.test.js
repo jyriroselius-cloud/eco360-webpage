@@ -59,7 +59,7 @@ describe('Site stats integrity', () => {
     // ECO360 Platform DB (fnrhhzvgghmxuwabcpvk):
     //   SELECT COUNT(*) FROM eco_label_snapshots  →  0  (2026-08-26)
     //   SELECT COUNT(*) FROM eco_label_snapshots WHERE co2_manufacture_source_url IS NOT NULL  →  0  (2026-08-26)
-    // Per kickoff #214 and #65: claim is unverifiable until this is non-zero.
+    // Per kickoff #214 and #65: claim is FALSE — 0 rows confirmed 2026-08-26.
     // To re-enable: verify coverage, record query + date here, then update copy in all six locations.
     const hits = [...html.matchAll(/tier and a source|source on every (number|figure)/gi)];
     expect(hits.map(h => h[0])).toEqual([]);
