@@ -1,5 +1,25 @@
 # Changelog — eco360-webpage
 
+## [1.2.0] — 2026-08-26
+
+### SEO head audit — tier-only copy (#214) + offers removal (#216)
+
+**Background:** kickoff #210 rule: no assertion in the head that is not supported in the body.
+- `eco_label_snapshots`: 0 rows confirmed (ECO360 Platform DB query 2026-08-26) — "and a source" claim is FALSE.
+- Offers array (5700/9120/14820 EUR): prices not visible on page → Google Structured Data policy violation.
+
+**Changes:**
+- `meta[description]`: removed "and a source", "Cut EU reporting costs by up to 90%.", "Deepest in electronics."
+- `og:description`: removed "and a source"
+- `twitter:description`: removed "and a source", "Cut EU reporting costs by up to 90%."
+- JSON-LD `SoftwareApplication.description`: removed "and a source"
+- JSON-LD `offers` array: removed entirely (Starter/Growth/Professional prices)
+- Hero lede (body): "and a source on every figure, cutting EU reporting costs by up to 90%" → "on every figure"
+- H2 tiers section: "tier and a source" → "tier"
+- `tests/stats.test.js`: comment updated — claim is FALSE (0 rows 2026-08-26)
+
+**Tests:** 39 → 41 (+2: source-claim full-file scan, offers-visibility guard)
+
 ## [1.1.0] — 2026-08-18
 
 ### Stats row correction (backlog #65)
