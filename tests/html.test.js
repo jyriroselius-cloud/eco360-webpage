@@ -81,6 +81,19 @@ describe('HTML structure', () => {
     expect(html).toContain('https://eco360.ai/');
   });
 
+  it('ld+json block parses as valid JSON and Organization node has required identity fields', () => {
+    const match = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    expect(match).not.toBeNull();
+    const graph = JSON.parse(match[1]);
+    const org = graph['@graph'].find(n => n['@type'] === 'Organization');
+    expect(org).toBeDefined();
+    expect(org.legalName).toBe('EcoGreen360 Oy');
+    expect(org.foundingDate).toBe('2024');
+    expect(org.vatID).toBe('FI34896968');
+    expect(org.identifier).toMatchObject({ '@type': 'PropertyValue', propertyID: 'FI-business-id', value: '3489696-8' });
+    expect(org.sameAs).toContain('https://www.linkedin.com/company/eco360-ltd/');
+  });
+
   it('passes html-validate with no errors', async () => {
     const report = await validator.validateString(html);
     const errors = report.results.flatMap(r => r.messages.filter(m => m.severity === 2));
