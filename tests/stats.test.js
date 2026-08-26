@@ -55,8 +55,30 @@ describe('Site stats integrity', () => {
     expect(html).toContain(`data-count="${ELECTRICITY_COUNTRIES}"`);
   });
 
-  it('tile 4: tier claim does not include "and a source" (source coverage unverified)', () => {
-    expect(html).toContain('of figures carry a tier');
-    expect(html).not.toMatch(/of figures carry a tier and a source/);
+  it('source claim absent from the whole file — body, head and structured data (#214, #65)', () => {
+    // ECO360 Platform DB (fnrhhzvgghmxuwabcpvk):
+    //   SELECT COUNT(*) FROM eco_label_snapshots  →  0  (2026-08-26)
+    //   SELECT COUNT(*) FROM eco_label_snapshots WHERE co2_manufacture_source_url IS NOT NULL  →  0  (2026-08-26)
+    // Per kickoff #214 and #65: claim is unverifiable until this is non-zero.
+    // To re-enable: verify coverage, record query + date here, then update copy in all six locations.
+    const hits = [...html.matchAll(/tier and a source|source on every (number|figure)/gi)];
+    expect(hits.map(h => h[0])).toEqual([]);
+  });
+
+  it('every price in structured data is visible in the page body (#216)', () => {
+    // Prices in JSON-LD must appear in the body — Google's policy requires on-page visibility for Offer markup.
+    // If the offers array is removed from structured data, this test passes automatically.
+    // Decision required: remove offers, or add a visible pricing section. See kickoff #216.
+    const ldMatch = html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/);
+    if (!ldMatch) return;
+    const ld = JSON.parse(ldMatch[1]);
+    const body = html.split('</head>')[1] ?? html;
+    const apps = ld['@graph'] ? ld['@graph'].filter(n => n.offers) : [];
+    for (const app of apps) {
+      for (const o of [].concat(app.offers)) {
+        const pricePattern = new RegExp(String(o.price).replace(/(\d)(?=(\d{3})+$)/g, '$1[\\s,.]?'));
+        expect(body, `price ${o.price} is in structured data but not visible on the page`).toMatch(pricePattern);
+      }
+    }
   });
 });

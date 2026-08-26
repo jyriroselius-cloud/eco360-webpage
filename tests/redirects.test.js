@@ -1,4 +1,6 @@
 import { describe, it, expect } from 'vitest';
+import { readFileSync } from 'fs';
+import { resolve } from 'path';
 
 const BASE = 'https://eco360-webpage.vercel.app';
 
@@ -15,10 +17,10 @@ describe('301/308 redirects from Wix-era paths', () => {
     expect(r.location).toContain('/#platform');
   });
 
-  it('/solutions → /#solutions', async () => {
+  it('/solutions → /#platform', async () => {
     const r = await getRedirect('/solutions');
     expect(r.status).toBe(308);
-    expect(r.location).toContain('/#solutions');
+    expect(r.location).toContain('/#platform');
   });
 
   it('/about → /#team', async () => {
@@ -45,22 +47,22 @@ describe('301/308 redirects from Wix-era paths', () => {
     expect(r.location).toContain('/#contact');
   });
 
-  it('/pricing → /#pricing', async () => {
+  it('/pricing → /#contact', async () => {
     const r = await getRedirect('/pricing');
     expect(r.status).toBe(308);
-    expect(r.location).toContain('/#pricing');
+    expect(r.location).toContain('/#contact');
   });
 
-  it('/co2-tools → /#device-search', async () => {
+  it('/co2-tools → /#lookup', async () => {
     const r = await getRedirect('/co2-tools');
     expect(r.status).toBe(308);
-    expect(r.location).toContain('/#device-search');
+    expect(r.location).toContain('/#lookup');
   });
 
-  it('/co2tools → /#device-search', async () => {
+  it('/co2tools → /#lookup', async () => {
     const r = await getRedirect('/co2tools');
     expect(r.status).toBe(308);
-    expect(r.location).toContain('/#device-search');
+    expect(r.location).toContain('/#lookup');
   });
 
   it('/blog → /', async () => {
@@ -90,5 +92,15 @@ describe('301/308 redirects from Wix-era paths', () => {
   it('root / returns 200 (no redirect loop)', async () => {
     const res = await fetch(BASE);
     expect(res.status).toBe(200);
+  });
+
+  it('every redirect fragment resolves to an id in index.html (#215)', () => {
+    const indexHtml = readFileSync(resolve(process.cwd(), 'public/index.html'), 'utf8');
+    const vercelConfig = JSON.parse(readFileSync(resolve(process.cwd(), 'vercel.json'), 'utf8'));
+    const ids = new Set([...indexHtml.matchAll(/id="([a-z0-9-]+)"/g)].map(m => m[1]));
+    for (const r of vercelConfig.redirects) {
+      const frag = r.destination.split('#')[1];
+      if (frag) expect(ids, `redirect ${r.source} → #${frag} — id not found in index.html`).toContain(frag);
+    }
   });
 });

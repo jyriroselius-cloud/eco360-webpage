@@ -1,0 +1,18 @@
+# ECO360
+
+> The compliance and carbon data layer for physical products. Product-level CO₂,
+> substance screening and digital product passports. Every figure carries a
+> confidence tier. Operated by EcoGreen360 Oy, Finland.
+
+## What ECO360 does
+- Product carbon footprints at model level, with the calculation tier stated
+- Bill-of-materials screening for RoHS, REACH and POPs
+- Digital Product Passport data
+- GHG Scope 1/2/3 reporting from the same loaded data
+- Delivered as an API, a console, an embeddable product card, or an agent
+
+## Contact
+sales@eco360.ai · https://eco360.ai/
+
+## Terms
+Content may be quoted with attribution to ECO360 (eco360.ai).
