@@ -65,6 +65,37 @@ describe('Site stats integrity', () => {
     expect(hits.map(h => h[0])).toEqual([]);
   });
 
+  it('no UNVERIFIED CLAIMS markers in published HTML (#218)', () => {
+    // All four UNVERIFIED CLAIMS comments cleared 2026-08-27:
+    //   :502 "Deepest in electronics" → "Built for electronics" (bare superlative removed)
+    //   :566 IFO/BDI €320k citation → "six-figure budget" without unverifiable source
+    //   :583 "~€40,000/year" + "−90%" → reference to cost calculator
+    //   :781 "observed automation savings" → "modelled automation savings"
+    // This test prevents re-introduction without a new verification record.
+    expect(html).not.toContain('UNVERIFIED CLAIMS');
+  });
+
+  it('no bare "Deepest in" superlative in marketing copy (#218)', () => {
+    expect(html).not.toContain('Deepest in electronics');
+  });
+
+  it('no specific unverified price claim "€40,000/year" in static copy (#218)', () => {
+    // The interactive cost calculator is excluded (it labels itself illustrative).
+    // Static marketing copy must not assert a specific price.
+    const body = html.split('</head>')[1] ?? html;
+    const strippedScripts = body.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
+    expect(strippedScripts).not.toContain('€40,000/year');
+  });
+
+  it('no IFO / BDI citation in visible copy (#218)', () => {
+    // Citation removed because the exact €320k figure could not be verified.
+    // If re-introduced, record the source URL and date in a comment here.
+    const body = html.split('</head>')[1] ?? html;
+    const strippedScripts = body.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, '');
+    expect(strippedScripts).not.toContain('IFO');
+    expect(strippedScripts).not.toContain('BDI');
+  });
+
   it('every price in structured data is visible in the page body (#216)', () => {
     // Prices in JSON-LD must appear in the body — Google's policy requires on-page visibility for Offer markup.
     // If the offers array is removed from structured data, this test passes automatically.

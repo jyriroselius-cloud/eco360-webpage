@@ -70,11 +70,6 @@ describe('HTML structure', () => {
     expect(footer).toMatch(/<h3\b/i);
   });
 
-  it('has no UNVERIFIED CLAIMS that are empty (placeholder structure intact)', () => {
-    // Comments should exist but content between them may be blank — just verify structure
-    const count = (html.match(/UNVERIFIED CLAIMS/g) || []).length;
-    expect(count).toBeGreaterThan(0);
-  });
 
   it('has canonical URL', () => {
     expect(html).toContain('rel="canonical"');
