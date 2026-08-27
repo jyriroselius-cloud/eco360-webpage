@@ -2,13 +2,24 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync } from 'fs';
 import { resolve } from 'path';
 
-// Regulations the BoM engine actively assesses for EEA-market products (#223)
+// Regulations the BoM engine actively assesses for EEA-market products (#223, #224)
+// Source: eco360-platform api/app/workbook/compliance.py ALL_THEMES[:3]
+//   ("pfas" → PFAS, "svhc" → REACH SVHC, "rohs" → RoHS)
+// Recorded: 2026-08-27. When ALL_THEMES changes, update both repos together.
+// The platform repo test test_all_themes_invariant() will fail on the other end.
 const ASSESSED = ['PFAS', 'REACH SVHC', 'RoHS'];
 
-// In scope but structurally not_applicable for EEA-market products
+// In scope but structurally not_applicable for EEA-market products (#224)
+// Source: eco360-platform api/app/workbook/compliance.py ALL_THEMES[3:]
+//   ("tsca" → TSCA, "prop65" → Prop 65)
+// Basis: 2026-08-24 scope decision in platform Decisions.md — TSCA and Prop 65 rules
+//   are defined in the engine but flagged not_applicable for EEA-market products.
 const NOT_APPLICABLE_EEA = ['TSCA', 'Prop 65'];
 
-// EU frameworks/registries the engine reads or exposes data for (not substance screening rules)
+// EU frameworks/registries the engine reads or exposes data for — not substance screening (#224)
+// SCIP: engine queries ECHA SCIP notifications API (eco360-platform routers/scip.py + auto_enrich.py)
+// WEEE: engine derives weee_category + weee_recovery_pct per device (routers/resolve.py)
+// These are not in ALL_THEMES (which covers substance screening only).
 const EU_FRAMEWORKS = ['SCIP', 'WEEE'];
 
 const APPROVED = new Set([...ASSESSED, ...NOT_APPLICABLE_EEA, ...EU_FRAMEWORKS]);
