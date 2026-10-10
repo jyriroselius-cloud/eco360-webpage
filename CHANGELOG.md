@@ -1,5 +1,21 @@
 # Changelog — eco360-webpage
 
+## [1.6.0] — 2026-10-10
+
+### Sell the service, not the surfaces — Excel in, workbook out (#364)
+
+- **#platform -osio uudelleenjärjestetty:** 4 korttia → 3 korttia (ostopolku)
+  - Kortti 1 "Start here — Send us the file": 5 bulletia (7 sheettia, 71 saraketta, 4 reittiä, 12kk/6v säilytys)
+  - Kortti 2 "Console": päivitetty lede + 3 bulletia
+  - Kortti 3 "API · product card · agent": konsolidoi 3 aiempaa korttia yhdeksi
+- **CSS grid:** `.surfaces{repeat(4,1fr)}` → `repeat(3,1fr)`, breakpoint 1200px → 2-kolumni
+- **H2:** "Send us the file. Get a **workbook** back."
+- **Eyebrow:** "Three ways to start · one engine"
+- **Stack caption:** "One engine, six layers. Send a file, drive the console, or build on the API."
+- **CTA "Send us a file"** lisätty heroön ja contact-osioon (mailto:sales@eco360.ai)
+- Ei kosketa: #bom, tier-väitteet, kattavuusprosentit
+- PR #3: https://github.com/jyriroselius-cloud/eco360-webpage/pull/3
+
 ## [1.5.0] — 2026-10-10
 
 ### Logo swap + Compliance Radar + brand fonts (#225)
