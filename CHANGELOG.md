@@ -1,5 +1,22 @@
 # Changelog — eco360-webpage
 
+## [1.5.0] — 2026-10-10
+
+### Logo swap + Compliance Radar + brand fonts (#225)
+
+- **Logo:** ECO360°-wordmark (`eco360-wordmark-on-dark.svg`) korvaa vanhan pilvilogon nav+footer
+- **Favicons:** brand-kitti (ico/svg/apple-touch-icon/icon-192/icon-512/site.webmanifest) korvaa inline data: URI
+- **OG-kuva:** `og-image-1200x630.png` (uusi brändikuva)
+- **Fontit:** Instrument Sans 700, IBM Plex Mono 400+600, Inter variable self-hostattu woff2:ina — ei CDN-riippuvuuksia
+- **Compliance Radar:** korvaa 27.9.2026 vanhentunut EmpCo-countdown
+  - Otsikko "are now illegal", eyebrow "in force since 27 September 2026"
+  - EmpCo count-up chippi + FI-siirtymächippi (HE 47/2026 ✓ EV 97/2026 vp, 9.6.2026)
+  - Seuraava kohde: akkupassi 18.2.2027 (tarkka laskuri)
+  - ESPR ~2027/~2029/~2030 = "expected YYYY" (ei sekuntilaskuria)
+  - 6-pisteen aikajana, self-advancing
+- **`#pricing` → `#contact`** ("Estimate your saving" -linkki)
+- +6 testiä (`tests/laws.test.js`, 67 yhteensä): LAWS-vakiokuri
+
 ## [1.4.0] — 2026-08-26
 
 ### Legal pages + footer identity (#222)
