@@ -279,6 +279,7 @@ nav img{height:30px;display:block}
 .surf li{font-size:13.5px;color:var(--dim);padding-left:22px;position:relative}
 .surf li::before{content:"→";position:absolute;left:0;color:var(--green)}
 @media(max-width:1200px){.surfaces{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1200px) and (min-width:641px){.surfaces .surf:last-child{grid-column:1/-1}}
 @media(max-width:640px){.surfaces{grid-template-columns:1fr}}
 
 /* API code block */
@@ -827,7 +828,7 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
   <div class="wrap">
     <div class="sechead rv">
       <span class="eyebrow t">Substance compliance</span>
-      <h2>Send the file<br><span class="gr">as it is</span>.</h2>
+      <h2>Every article,<br>against the <span class="gr">list in force</span>.</h2>
       <p class="lede">No onboarding project, no supplier campaign, no template. The BoM engine reads your bill of materials in whatever shape it left your ERP — then assesses every article for PFAS, REACH SVHC and RoHS. TSCA and Prop 65 are in scope; for EEA-market products they return not_applicable.</p>
     </div>
     <div class="bomgrid">
