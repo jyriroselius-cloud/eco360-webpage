@@ -266,7 +266,7 @@ nav img{height:30px;display:block}
 @media(max-width:900px){.cas{grid-template-columns:64px 1fr;grid-auto-rows:auto}.cas .unc,.cas .tier{grid-column:2}}
 
 /* ---------------- three surfaces ---------------- */
-.surfaces{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;margin-top:56px}
+.surfaces{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:56px}
 .surf{background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:28px 24px;display:flex;flex-direction:column;
   transition:transform .45s var(--ease),border-color .45s var(--ease),box-shadow .45s var(--ease)}
 .surf:hover{transform:translateY(-8px);border-color:var(--green-d);box-shadow:0 24px 60px rgba(0,0,0,.5)}
@@ -529,6 +529,7 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
       <div class="hero-ctas">
         <a class="btn primary" href="#contact">Book a demo →</a>
         <a class="btn ghost" href="#lookup">Look up a device</a>
+        <a class="btn ghost" href="mailto:sales@eco360.ai?subject=File%20for%20assessment">Send us a file</a>
       </div>
       <p class="hero-note">Built for electronics — the same engine screens any bill of materials and reports for any company.</p>
     </div>
@@ -551,7 +552,7 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
           <li class="k1"><i></i>Ingestion</li>
         </ul>
       </div>
-      <p class="stack-caption">One engine, six layers — sold as an API, a console and a product card.</p>
+      <p class="stack-caption">One engine, six layers. Send a file, drive the console, or build on the API.</p>
     </div>
   </div>
   <div class="wrap">
@@ -709,26 +710,28 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
 <section id="platform" style="padding-top:40px">
   <div class="wrap">
     <div class="sechead rv">
-      <span class="eyebrow t">One engine · four surfaces</span>
-      <h2>Buy it as an API, a console,<br>a product card, or an <span class="gr">agent</span>.</h2>
+      <span class="eyebrow t">Three ways to start · one engine</span>
+      <h2>Send us the file.<br>Get a <span class="gr">workbook</span> back.</h2>
     </div>
     <div class="surfaces">
       <div class="surf rv">
-        <span class="badge">The product</span>
-        <h3>Data API</h3>
+        <span class="badge">Start here</span>
+        <h3>Send us the file</h3>
 
-        <p>Model-level device carbon, minerals, WEEE data and compliance status as JSON. Usage-based pricing. Built for web shops, ERP vendors, refurb platforms and passport operators.</p>
+        <p>You integrate nothing to get the first answer. Your file in the shape it left your ERP — no template, no re-keying, no supplier campaign. 12,357 rows by 53 columns is a normal size.</p>
         <ul>
-          <li>Tier + source + uncertainty on every field</li>
-          <li>Substantiation URL in every comparative response</li>
-          <li>Country-specific use-phase on request</li>
+          <li>Back: one Excel. Seven sheets, 71 columns, identical for every customer and every run.</li>
+          <li>Every row names the route that decided it — HS code, cache, keyword rule or model. The route is the confidence.</li>
+          <li>What we cannot answer prints "Not reported" with the reason and what to ask the supplier. Nothing is silently dropped.</li>
+          <li>Run it again next quarter: the diff sheet says what changed and why — factor set, mass source, classification, profile, rule.</li>
+          <li>Your file is kept 12 months, the workbook 6 years, in private storage behind links that expire in five minutes.</li>
         </ul>
       </div>
       <div class="surf rv d1">
         <span class="badge">For your team</span>
         <h3>Console</h3>
 
-        <p>Upload your product catalogue as it is — CSV straight from the ERP. Fuzzy matching against the global database, inventory intelligence, GHG Scope 1/2/3 reporting with year-on-year comparison.</p>
+        <p>The same engine, driven by you. Upload the catalogue as it is, match it against the global database, and build the GHG report with year-on-year comparison.</p>
         <ul>
           <li>18 built-in inventory analyses</li>
           <li>AI-assisted matching and gap-filling</li>
@@ -736,27 +739,16 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
         </ul>
       </div>
       <div class="surf rv d2">
-        <span class="badge">For your customers</span>
-        <h3>Product card · DPP</h3>
+        <span class="badge">Build on it</span>
+        <h3>API · product card · agent</h3>
 
-        <p>A public per-product page and embeddable widget. Not a green stamp — a data disclosure that complies with the EmpCo Directive by design: numbers, units, method, source, retrieval date.</p>
+        <p>When the answer has to live inside your own product. Model-level carbon, minerals, WEEE data and compliance status as JSON, a public product card and DPP payload, and an agent over the same API the console calls.</p>
         <ul>
-          <li>QR to a full substantiation page</li>
-          <li>GS1 Digital Link identifiers</li>
-          <li>EN-standards-aligned DPP payload</li>
+          <li>Tier, source and uncertainty on every field; substantiation URL in every comparative response</li>
+          <li>Public per-product page and embeddable widget — a data disclosure, not a green stamp; GS1 Digital Link, EN-aligned DPP payload</li>
+          <li>Agent: natural-language queries, and alerts when the data moves underneath you — a retired factor, a superseded substance list, a lost EPREL match</li>
         </ul>
-      </div>
-      <div class="surf rv d3">
-        <span class="badge">Automate it</span>
-        <h3>Agent</h3>
-
-        <p>An AI agent that queries your ECO360 data through the same API the console uses. Ask in plain language — every figure comes back with its tier, its source and its retrieval date.</p>
-        <ul>
-          <li>Natural-language queries over your inventory</li>
-          <li>Alerts when the data moves underneath you — a retired factor, a superseded substance list, a lost EPREL match</li>
-          <li>GHG narrative drafted from the issued report snapshot — every figure traceable to its calculation line</li>
-        </ul>
-        <p style="font-size:.85em;margin-top:14px;opacity:.75">Available to design partners. <a href="#contact" style="color:inherit;text-decoration:underline">Talk to us →</a></p>
+        <p style="font-size:.85em;margin-top:14px;opacity:.75">The agent is available to design partners. <a href="#contact" style="color:inherit;text-decoration:underline">Talk to us →</a></p>
       </div>
     </div>
 
@@ -990,6 +982,7 @@ footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255
       <p class="lede" style="max-width:56ch">Bring a product list or a BoM file to the demo — we'll run it through the platform live. That's the whole pitch.</p>
       <div class="hero-ctas" style="justify-content:center">
         <a class="btn primary" href="mailto:sales@eco360.ai?subject=Demo%20request">Book a demo →</a>
+        <a class="btn ghost" href="mailto:sales@eco360.ai?subject=File%20for%20assessment">Send us a file</a>
       </div>
       <p class="hero-note" style="margin-top:26px">sales@eco360.ai</p>
     </div>
