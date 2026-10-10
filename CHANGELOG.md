@@ -1,5 +1,13 @@
 # Changelog — eco360-webpage
 
+## [1.7.0] — 2026-10-10
+
+### One headline per promise, third card at 1100px (#365, #366)
+
+- **#365**: `#bom h2` vaihdettu — "Send the file as it is." → "Every article, against the **list in force**." — `#platform` omistaa "Send us the file" -lupauksen; body text koskematta
+- **#366**: vaihtoehto (b) — `@media(max-width:1200px) and (min-width:641px){.surfaces .surf:last-child{grid-column:1/-1}}` — orphan kortti kasvaa täyteen leveyteen 641–1200px-bandissa
+- PR #4: https://github.com/jyriroselius-cloud/eco360-webpage/pull/4
+
 ## [1.6.0] — 2026-10-10
 
 ### Sell the service, not the surfaces — Excel in, workbook out (#364)
