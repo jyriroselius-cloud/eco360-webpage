@@ -165,7 +165,7 @@ small.src{display:block;font-size:12px;color:var(--dim2);margin-top:10px}
 
 /* ---------------- EmpCo countdown ---------------- */
 #empco{padding:0}
-.empco-band{border-block:1px solid rgba(255,255,255,.06);padding:64px 0}
+.empco-band{position:relative;z-index:2;border-block:1px solid rgba(255,255,255,.06);padding:64px 0}
 .empco-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:56px;align-items:center}
 .count{display:flex;gap:14px}
 .count .cell{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:18px 8px;text-align:center;flex:1;min-width:86px}
@@ -480,10 +480,10 @@ button{font-family:inherit;border:0;background:none;cursor:pointer;color:inherit
 .stage{position:relative;height:100dvh;overflow:visible;background:none}
 /* fallback: if the remote video cannot load (blocked preview, offline), the poster frame
    doubles as the stage background so the hero never renders as a black void */
-.stage video{position:fixed;inset:0;width:100vw;height:100dvh;object-fit:cover;object-position:50% 40%;pointer-events:none;z-index:-2}
+.stage video{position:fixed;inset:0;width:100vw;height:100dvh;object-fit:cover;object-position:50% 40%;pointer-events:none;z-index:0}
 @media(min-aspect-ratio:16/9){.stage video{object-position:50% 24%}}
 /* three shade overlays */
-.shade{position:fixed;inset:0;pointer-events:none;z-index:-1}
+.shade{position:fixed;inset:0;pointer-events:none;z-index:0}
 .shade.h{background:linear-gradient(90deg,
   rgba(var(--shade),.683) 0%, rgba(var(--shade),.595) 20%, rgba(var(--shade),.458) 40%,
   rgba(var(--shade),.221) 60%, rgba(var(--shade),.039) 80%, rgba(var(--shade),.054) 100%)}
@@ -541,6 +541,7 @@ button{font-family:inherit;border:0;background:none;cursor:pointer;color:inherit
 
 /* ---------- hero, bottom left ---------- */
 .vh-hero{position:absolute;left:calc(64*var(--u));bottom:calc(64*var(--u));z-index:3}
+.vh-logo,.vh-sound,.vh-menu,.vh-panel,.vh-cue{z-index:5}
 .vh-brand{font-family:var(--fb);font-weight:600;font-size:calc(17*var(--u));letter-spacing:.04em;color:var(--green);margin-bottom:calc(18*var(--u))}
 .vh-title{font-family:var(--fd);font-weight:300;color:var(--ink);line-height:1.04}
 .vh-title .vh-line{display:block;overflow:hidden}
@@ -660,13 +661,13 @@ button{font-family:inherit;border:0;background:none;cursor:pointer;color:inherit
 .totop:hover{border-color:var(--green)}
 /* the river stays visible under everything; this veil darkens it progressively
    after the hero so long-form content stays readable */
-.page-veil{position:absolute;inset:0;z-index:-1;pointer-events:none;
+.page-veil{position:absolute;inset:0;z-index:1;pointer-events:none;
   background:linear-gradient(180deg, rgba(6,9,13,0) 0, rgba(6,9,13,0) 55vh,
     rgba(6,9,13,.42) 140vh, rgba(6,9,13,.52) 100%)}
 /* readability now lives in the cards and in soft text shadows, not in a heavy veil */
 h1,h2,h3,.lede,.sechead small{text-shadow:0 2px 26px rgba(3,6,8,.85)}
 .empco-band{background:linear-gradient(180deg, rgba(10,17,26,.55), rgba(6,9,13,.4));backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-footer{background:rgba(6,9,13,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
+footer{position:relative;z-index:2;background:rgba(6,9,13,.78);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px)}
 /* ============================================================
    V3 UNIFIED LOOK — the hero's design language carried through
    every section: light display headings, mono eyebrows, glass
