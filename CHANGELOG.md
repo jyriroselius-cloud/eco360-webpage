@@ -1,5 +1,16 @@
 # Changelog — eco360-webpage
 
+## [2.0.0] — 2026-10-12
+
+### V3-design live — uusi kotisivu tuotantoon (PR #5)
+
+- Uusi V3-design: Instrument Sans + IBM Plex Mono, hero-taustavideo, platform API widget
+- `assets/eco360-hero-1080p.{mp4,webm}` hero-taustalle
+- CSP: lisätty `fonts.googleapis.com` (style-src), `fonts.gstatic.com` (font-src), `media-src 'self'`
+- Kaikki 301-redirectit ja security-headerit säilytetty
+- PR #5: https://github.com/jyriroselius-cloud/eco360-webpage/pull/5
+- Jyrin päätös 12.10.2026
+
 ## [1.7.0] — 2026-10-10
 
 ### One headline per promise, third card at 1100px (#365, #366)
