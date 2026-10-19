@@ -2,7 +2,7 @@
 
 > The compliance and carbon data layer for physical products. Product-level CO₂,
 > substance screening and digital product passports. Every figure carries a
-> confidence tier. Operated by EcoGreen360 Oy, Finland.
+> confidence tier. Operated by Eco360 Ltd, Finland.
 
 ## What ECO360 does
 - Product carbon footprints at model level, with the calculation tier stated

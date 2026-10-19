@@ -84,10 +84,10 @@ describe('HTML structure', () => {
     const graph = JSON.parse(match[1]);
     const org = graph['@graph'].find(n => n['@type'] === 'Organization');
     expect(org).toBeDefined();
-    expect(org.legalName).toBe('EcoGreen360 Oy');
-    expect(org.foundingDate).toBe('2024');
-    expect(org.vatID).toBe('FI34896968');
-    expect(org.identifier).toMatchObject({ '@type': 'PropertyValue', propertyID: 'FI-business-id', value: '3489696-8' });
+    // Company identity: Eco360 Ltd (Eco360 Oy), business ID 3482010-3 — Jyri 2026-10-19, supersedes Decisions.md 2026-09-06.
+    expect(org.legalName).toBe('Eco360 Ltd');
+    expect(org.vatID).toBe('FI34820103');
+    expect(org.identifier).toMatchObject({ '@type': 'PropertyValue', propertyID: 'FI-business-id', value: '3482010-3' });
     expect(org.sameAs).toContain('https://www.linkedin.com/company/eco360-ltd/');
   });
 
@@ -116,8 +116,9 @@ describe('HTML structure', () => {
     const footerMatch = html.match(/<footer[\s\S]*?<\/footer>/i);
     expect(footerMatch).not.toBeNull();
     const footer = footerMatch[0];
-    expect(footer).toContain('3489696-8');
-    expect(footer).toContain('FI34896968');
+    expect(footer).toContain('3482010-3');
+    expect(footer).toContain('FI34820103');
+    expect(footer).not.toContain('3489696-8');
     expect(footer).not.toContain('COMPANY INFO GATE');
   });
 });
@@ -140,10 +141,11 @@ describe('legal pages', () => {
       expect(content).toContain('href="/');
     });
 
-    it(`${page.name}.html contains EcoGreen360 Oy identity`, () => {
+    it(`${page.name}.html contains Eco360 Ltd identity`, () => {
       const content = readFileSync(resolve(process.cwd(), page.path), 'utf8');
-      expect(content).toContain('EcoGreen360 Oy');
-      expect(content).toContain('3489696-8');
+      expect(content).toContain('Eco360 Ltd');
+      expect(content).toContain('3482010-3');
+      expect(content).not.toContain('EcoGreen360');
     });
   }
 

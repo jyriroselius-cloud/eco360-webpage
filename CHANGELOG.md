@@ -8,8 +8,9 @@
 - `<main>` landmark restored; unclosed `.stats` div closed; raw `&` encoded; `type="button"` on buttons; mobile nav gets its own aria-label
 - HTML 1.14 MB → 0.12 MB: base64 WebM fallback removed, poster moved to `assets/eco360-hero-poster.jpg`
 - Stats render 536 / 47 in static HTML (crawlers and no-JS readers saw 0)
-- JSON-LD Organization identity restored per #222: legalName EcoGreen360 Oy (alternateName Eco360 Ltd), foundingDate, vatID, business ID, LinkedIn sameAs; logo → square `icon-512.png`
+- JSON-LD Organization: vatID, business ID, LinkedIn sameAs; logo → square `icon-512.png`
 - "Deepest in electronics" → "Built for electronics" in meta, Twitter and footer (#218 regression)
+- Company identity → **Eco360 Ltd** (Eco360 Oy), business ID 3482010-3, VAT FI34820103 across footer, JSON-LD, privacy, terms, claim-methodology and llms.txt (Jyri 2026-10-19; supersedes Decisions.md 2026-09-06)
 - `sitemap.xml` lists /claim-methodology, /privacy, /terms; branded `404.html`
 - html-validate: `no-autoplay` off (decorative muted hero video, by design)
 - Cost estimator: unsourced "~€400,000" Before-card figure replaced with "a recurring six-figure line item"; €320k IFO/BDI anchor dropped from the model note; `UNVERIFIED CLAIMS` marker cleared (#218, Jyri 2026-10-19)
