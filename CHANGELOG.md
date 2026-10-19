@@ -1,5 +1,19 @@
 # Changelog — eco360-webpage
 
+## [2.0.1] — 2026-10-19
+
+### SEO quick fixes + V3 regressions restored (SEO audit 18.10.2026)
+
+- Footer legal links `#` → `/privacy`, `/terms`, `/claim-methodology`; footer headings h4 → h3
+- `<main>` landmark restored; unclosed `.stats` div closed; raw `&` encoded; `type="button"` on buttons; mobile nav gets its own aria-label
+- HTML 1.14 MB → 0.12 MB: base64 WebM fallback removed, poster moved to `assets/eco360-hero-poster.jpg`
+- Stats render 536 / 47 in static HTML (crawlers and no-JS readers saw 0)
+- JSON-LD Organization identity restored per #222: legalName EcoGreen360 Oy (alternateName Eco360 Ltd), foundingDate, vatID, business ID, LinkedIn sameAs; logo → square `icon-512.png`
+- "Deepest in electronics" → "Built for electronics" in meta, Twitter and footer (#218 regression)
+- `sitemap.xml` lists /claim-methodology, /privacy, /terms; branded `404.html`
+- html-validate: `no-autoplay` off (decorative muted hero video, by design)
+- Still failing, needs a decision: cost estimator `UNVERIFIED CLAIMS` marker (€320k IFO/BDI anchor, #218)
+
 ## [2.0.0] — 2026-10-12
 
 ### V3-design live — uusi kotisivu tuotantoon (PR #5)

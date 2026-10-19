@@ -19,6 +19,8 @@ const validator = new HtmlValidate({
     'prefer-native-element': 'off',
     'element-permitted-content': 'off',
     'no-abstract-roles': 'off',
+    // V3 hero: decorative background video is autoplay + muted + playsinline by design (PR #5).
+    'no-autoplay': 'off',
   },
 });
 
