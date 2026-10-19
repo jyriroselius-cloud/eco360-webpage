@@ -882,7 +882,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
       <div class="costcol">
         <span class="tag">Before — manual reporting</span>
         <b>100%</b>
-        <p>Typical annual compliance cost for an enterprise: ~€400,000 in external consultants, data collection and one-off calculations that expire the day they are delivered.</p>
+        <p>A recurring six-figure line item in external consultants, data collection and one-off calculations that expire the day they are delivered.</p>
       </div>
       <div class="costcol after">
         <span class="tag">After — with ECO360</span>
@@ -1460,8 +1460,10 @@ function calcUse(){
 calcUse();
 
 /* ---------- cost estimator ----------
-   UNVERIFIED CLAIMS: illustrative model — anchor €320k avg (IFO/BDI 2024), scaled by
-   catalogue size and obligations, savings capped at 90%. Review before publishing. */
+   Illustrative model, not anchored to any published cost study: a six-figure baseline
+   scaled by catalogue size and obligations, savings capped at 90%. Labelled in the UI as
+   "Illustrative estimate … Not a quotation." The former €320k IFO/BDI anchor and the
+   "~€400,000" Before-card figure were removed as unsourced (#218; Jyri, 2026-10-19). */
 function calcCost(){
   var prods=+document.getElementById('eprod').value;
   var frm=+document.getElementById('efrm').value;

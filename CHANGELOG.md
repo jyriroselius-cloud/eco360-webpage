@@ -12,7 +12,7 @@
 - "Deepest in electronics" → "Built for electronics" in meta, Twitter and footer (#218 regression)
 - `sitemap.xml` lists /claim-methodology, /privacy, /terms; branded `404.html`
 - html-validate: `no-autoplay` off (decorative muted hero video, by design)
-- Still failing, needs a decision: cost estimator `UNVERIFIED CLAIMS` marker (€320k IFO/BDI anchor, #218)
+- Cost estimator: unsourced "~€400,000" Before-card figure replaced with "a recurring six-figure line item"; €320k IFO/BDI anchor dropped from the model note; `UNVERIFIED CLAIMS` marker cleared (#218, Jyri 2026-10-19)
 
 ## [2.0.0] — 2026-10-12
 
