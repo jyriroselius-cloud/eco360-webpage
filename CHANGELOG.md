@@ -12,7 +12,7 @@
 - `sitemap.xml` lists `/about` (5 URLs); `llms.txt` gets a Company line pointing to `/about`
 - Tests: `tests/about.test.js` (page, company facts, address read from the single JSON-LD source and compared to page and footer, no bracketed placeholders / TODO / lorem, html-validate, structured data, routing, sitemap, llms.txt, footer). `tests/redirects.test.js`: `/about` and `/about-us` now checked against `vercel.json` (the live alias serves the old config until deploy)
 - Post-deploy acceptance (not testable before deploy): `/about` returns 200, `/about-us` redirects permanently to `/about`, Rich Results Test parses `Organization` + 2 × `Person`
-- Open: VAT FI34820103 is derived from the business ID; Jyri to confirm in the VAT register
+- VAT FI34820103 and postcode 37470 confirmed by Jyri 2026-10-21
 
 ## [2.0.1] — 2026-10-19
 
