@@ -11,6 +11,9 @@
 - GHG Scope 1/2/3 reporting from the same loaded data
 - Delivered as an API, a console, an embeddable product card, or an agent
 
+## Company
+Company information, founders and legal details: https://eco360.ai/about
+
 ## Contact
 sales@eco360.ai · https://eco360.ai/
 

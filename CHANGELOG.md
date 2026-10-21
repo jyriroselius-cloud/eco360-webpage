@@ -1,5 +1,19 @@
 # Changelog — eco360-webpage
 
+## [2.1.0] — 2026-10-21
+
+### About page and brand signals (kickoff 07 Marketing, SEO audit 18.10.2026)
+
+- New `/about` page (`public/about.html`): Who we are, Team (founder bios verbatim from the site), Company information (Eco360 Ltd / Eco360 Oy, business ID 3482010-3, VAT FI34820103, postal address, sales@eco360.ai, company LinkedIn), links to `/claim-methodology`, `/privacy`, `/terms`
+- Structured data on `/about`: one `@graph` with `AboutPage` (about → `#org`) and two `Person` nodes (`worksFor` → `#org`, `sameAs` → LinkedIn); `Organization` is referenced by `@id`, not duplicated
+- `Organization` in `index.html`: `address` as full `PostalAddress` (Hovinrinne 13, 37470 Vesilahti, FI) and `founder` → both Person `@id`s
+- Footer: "About" under Company; postal address in the legal line
+- `vercel.json`: `/about` redirect removed (own page now); `/about-us` → `/about`
+- `sitemap.xml` lists `/about` (5 URLs); `llms.txt` gets a Company line pointing to `/about`
+- Tests: `tests/about.test.js` (page, company facts, address read from the single JSON-LD source and compared to page and footer, no bracketed placeholders / TODO / lorem, html-validate, structured data, routing, sitemap, llms.txt, footer). `tests/redirects.test.js`: `/about` and `/about-us` now checked against `vercel.json` (the live alias serves the old config until deploy)
+- Post-deploy acceptance (not testable before deploy): `/about` returns 200, `/about-us` redirects permanently to `/about`, Rich Results Test parses `Organization` + 2 × `Person`
+- Open: VAT FI34820103 is derived from the business ID; Jyri to confirm in the VAT register
+
 ## [2.0.1] — 2026-10-19
 
 ### SEO quick fixes + V3 regressions restored (SEO audit 18.10.2026)
