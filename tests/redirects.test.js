@@ -29,16 +29,19 @@ describe('301/308 redirects from Wix-era paths', () => {
     expect(r.location).toContain('/#platform');
   });
 
-  it('/about → /#team', async () => {
-    const r = await getRedirect('/about');
-    expect(r.status).toBe(308);
-    expect(r.location).toContain('/#team');
+  // /about on nyt oma sivu (public/about.html) ja /about-us ohjaa sinne. Nämä kaksi
+  // tarkistetaan vercel.json:sta, koska live-alias palvelee vanhaa konfiguraatiota
+  // vasta deployn jälkeen. Live-tarkistus (/about 200, /about-us 308 → /about) on
+  // deployn jälkeinen hyväksymiskriteeri.
+  it('/about ei ole uudelleenohjaus (oma sivu)', () => {
+    const cfg = JSON.parse(readFileSync(resolve(process.cwd(), 'vercel.json'), 'utf8'));
+    expect(cfg.redirects.find(r => r.source === '/about')).toBeUndefined();
+    expect(readFileSync(resolve(process.cwd(), 'public/about.html'), 'utf8')).toContain('rel="canonical" href="https://eco360.ai/about"');
   });
 
-  it('/about-us → /#team', async () => {
-    const r = await getRedirect('/about-us');
-    expect(r.status).toBe(308);
-    expect(r.location).toContain('/#team');
+  it('/about-us → /about', () => {
+    const cfg = JSON.parse(readFileSync(resolve(process.cwd(), 'vercel.json'), 'utf8'));
+    expect(cfg.redirects.find(r => r.source === '/about-us')).toMatchObject({ destination: '/about', permanent: true });
   });
 
   it('/contact → /#contact', async () => {
