@@ -93,7 +93,9 @@ describe('/about — structured data', () => {
     expect(persons.map((p) => p.name).sort()).toEqual(['Jyri Roselius', 'Kari Ketola']);
     for (const p of persons) {
       expect(p.jobTitle, p.name).toBeTruthy();
-      expect(p.worksFor, p.name).toEqual({ '@id': 'https://eco360.ai/#org' });
+      // Tyypitetty viittaus: pelkkä {"@id"} ilman @typeä validator.schema.org tulkitsee Thingiksi
+      // ("Thing is not a known valid target type for worksFor"), koska solmu on määritelty etusivulla.
+      expect(p.worksFor, p.name).toEqual({ '@type': 'Organization', '@id': 'https://eco360.ai/#org' });
       expect(Array.isArray(p.sameAs) && p.sameAs.length > 0, `${p.name}: sameAs ei saa olla tyhjä`).toBe(true);
       for (const u of p.sameAs) expect(u, p.name).toMatch(/^https:\/\/([a-z]+\.)?linkedin\.com\/in\/[^/\s]+\/?$/);
     }

@@ -1,5 +1,11 @@
 # Changelog — eco360-webpage
 
+## [2.1.1] — 2026-10-21
+
+### /about: typed Organization reference on Person nodes
+
+- `worksFor` on both `Person` nodes is now `{"@type":"Organization","@id":"https://eco360.ai/#org"}` (still a reference, no copied properties). A bare `{"@id"}` made validator.schema.org read the target as `Thing` ("Thing is not a known valid target type for the worksFor property") because `#org` is defined on the home page, not on `/about`. `tests/about.test.js` asserts the typed reference exactly.
+
 ## [2.1.0] — 2026-10-21
 
 ### About page and brand signals (kickoff 07 Marketing, SEO audit 18.10.2026)
