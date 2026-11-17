@@ -1,5 +1,11 @@
 # Changelog — eco360-webpage
 
+## [2.1.2] — 2026-11-17
+
+### PACT Conformant text claim
+
+- Added "PACT Conformant" text claim to the #platform "Build on it" card in `public/index.html` and to `public/llms.txt` (PR #10). Text only, no PACT or WBCSD logo; a TODO comment marks the PACT Online Catalog link, pending Jyri's listing decision
+
 ## [2.1.1] — 2026-10-21
 
 ### /about: typed Organization reference on Person nodes
