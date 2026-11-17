@@ -10,6 +10,7 @@
 - Digital Product Passport data
 - GHG Scope 1/2/3 reporting from the same loaded data
 - Delivered as an API, a console, an embeddable product card, or an agent
+- PACT Conformant: WBCSD PACT Technical Specifications V3.0 data exchange, official conformance testing tool, November 2026
 
 ## Company
 Company information, founders and legal details: https://eco360.ai/about
