@@ -1,5 +1,13 @@
 # Changelog — eco360-webpage
 
+## [2.1.3] — 2026-11-17
+
+### Dev tooling: dependency upgrades and lockfile (PR #11)
+
+- Dev dependencies upgraded: `vitest` 2 → 4.1.12, `html-validate` 9 → 11.21.1; no test, config or assertion changes needed (80/80)
+- `package-lock.json` added to the repo (reproducible installs with `npm ci`); `npm audit fix` applied first (b868211)
+- `npm audit`: 13 vulnerabilities → 0 (all in dev dependencies; nothing in `public/` changed, published site unaffected)
+
 ## [2.1.2] — 2026-11-17
 
 ### PACT Conformant text claim
