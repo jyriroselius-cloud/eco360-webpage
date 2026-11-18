@@ -1,5 +1,14 @@
 # Changelog — eco360-webpage
 
+## [2.1.5] — 2026-11-18
+
+### Dependabot added; picomatch advisory open
+
+- `.github/dependabot.yml`: npm, repo root, weekly, max 3 open PRs, minor/patch updates for devDependencies grouped into one PR. Dependabot PRs are reviewed and merged by hand, never auto-merged
+- Dependabot alerts and security updates enabled for the repo
+- `npm audit` reports picomatch (GHSA-fc5q-39xc-vjpf, high, `<= 4.0.7`) through vitest → vite/tinyglobby → fdir. No patched version exists upstream yet, so the finding stays open (dev-only, not in the published site); Dependabot will propose the fix once one is released
+- Published site unchanged (nothing in `public/` touched)
+
 ## [2.1.4] — 2026-11-18
 
 ### Official PACT Conformant badge
