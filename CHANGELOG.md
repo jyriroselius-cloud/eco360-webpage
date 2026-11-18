@@ -1,5 +1,13 @@
 # Changelog — eco360-webpage
 
+## [2.1.6] — 2026-11-18
+
+### Supplier declaration formats in #bom
+
+- `#bom` list: one item — supplier declarations in IEC 62474 and IPC-1752A are read and checked against the official schemas; an undeclared substance stays "not declared", never zero (platform #569, live 17.11.2026)
+- `llms.txt`: one line for the same, stating export is not yet available (#570 not built; no export claim on the page)
+- Wording: formats we read, not certifications — no "certified", "compliant with" or "approved"
+
 ## [2.1.5] — 2026-11-18
 
 ### Dependabot added; picomatch advisory open
