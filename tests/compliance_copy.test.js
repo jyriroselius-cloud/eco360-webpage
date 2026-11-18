@@ -58,3 +58,18 @@ describe('BoM copy capability accuracy (#223)', () => {
     }
   });
 });
+
+describe('Supplier declaration copy (platform #569)', () => {
+  const combined = indexHtml + llmsTxt;
+  it('names both formats and states export is not available', () => {
+    expect(indexHtml).toContain('IEC 62474');
+    expect(indexHtml).toContain('IPC-1752A');
+    expect(indexHtml).toContain('never zero');
+    expect(llmsTxt).toContain('(export not yet available)');
+  });
+  it('never claims certification or export of these formats', () => {
+    for (const line of combined.split('\n').filter(l => /IEC 62474|IPC-1752/.test(l))) {
+      expect(line).not.toMatch(/certified|compliant with|approved|\bexport(s|ed)?\b(?!\s+not)/i);
+    }
+  });
+});
