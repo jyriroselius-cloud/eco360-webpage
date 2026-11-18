@@ -1,5 +1,13 @@
 # Changelog — eco360-webpage
 
+## [2.1.4] — 2026-11-18
+
+### Official PACT Conformant badge
+
+- PACT confirmed Eco360's conformant status by email on 18.11.2026 and sent the press kit. The official badge (`public/badges/pact-conformant.png`, 650×685 RGBA, sha256 `9803d2334a47dfe9ed043cc44cb37cd9d55ed2a1d8446ad47ef5ca8bf1ef48e1`, byte-identical to PACT's file) now sits above the existing "PACT Conformant" line in the #platform "Build on it" card
+- Shown unmodified per the PACT communication guidelines (Sept 2025): original PNG served as is (no re-encoding or variants), proportional scaling only (96 px desktop, 80 px at ≤600 px, explicit `width`/`height`), explicit CSS reset so no inherited filter, shadow, radius, opacity or blend applies, no hover effect, no PACT/WBCSD logo
+- `alt="PACT conformant — Partnership for Carbon Transparency"`, `loading="lazy"`, no link yet. TODO updated: link the badge to the carbon-transparency.org listing page once PACT lists Eco360. Claim text in `index.html` and `llms.txt` unchanged
+
 ## [2.1.3] — 2026-11-17
 
 ### Dev tooling: dependency upgrades and lockfile (PR #11)
