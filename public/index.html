@@ -286,6 +286,10 @@ small.src{display:block;font-size:12px;color:var(--dim2);margin-top:10px}
 .surf ul{list-style:none;margin-top:18px;display:flex;flex-direction:column;gap:9px}
 .surf li{font-size:13.8px;color:var(--dim);padding-left:22px;position:relative}
 .surf li::before{content:"→";position:absolute;left:0;color:var(--green)}
+/* Official PACT Conformant badge: shown unmodified (PACT communication guidelines, Sept 2025). Scale proportionally only; no filter, shadow, radius, opacity, blend or hover effect. */
+.surf li.pact{display:flex;flex-direction:column;align-items:flex-start;gap:14px;padding-left:22px;margin-top:10px}
+.surf li.pact img{flex:none;width:96px;height:auto;aspect-ratio:650/685;border:0;border-radius:0;box-shadow:none;filter:none;opacity:1;mix-blend-mode:normal;transform:none;transition:none;background:none;outline:0}
+@media(max-width:600px){.surf li.pact img{width:80px}}
 @media(max-width:1180px){.surfaces{grid-template-columns:1fr;max-width:760px;margin-left:auto;margin-right:auto}}
 @media(max-width:700px){.surfaces{grid-template-columns:1fr}}
 
@@ -1004,8 +1008,8 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
           <li>Tier, source and uncertainty on every field; substantiation URL in every comparative response</li>
           <li>Public per-product page and embeddable widget — a data disclosure, not a green stamp; GS1 Digital Link, EN-aligned DPP payload</li>
           <li>Agent: natural-language queries, and alerts when the data moves underneath you — a retired factor, a superseded substance list, a lost EPREL match</li>
-          <!-- TODO: link to the solution's PACT Online Catalog page once listed (Jyri decides on the listing) -->
-          <li>PACT Conformant — product footprints exchanged in the WBCSD PACT Technical Specifications V3.0 format, verified with PACT's official conformance testing tool (November 2026)</li>
+          <!-- TODO: PACT confirmed Eco360's conformant status on 18.11.2026. Once PACT lists Eco360 on carbon-transparency.org (expected end of week of 18.11.2026), link the badge to that listing page. Until then the badge has no link. -->
+          <li class="pact"><img src="/badges/pact-conformant.png" width="96" height="101" alt="PACT conformant — Partnership for Carbon Transparency" loading="lazy"><span>PACT Conformant — product footprints exchanged in the WBCSD PACT Technical Specifications V3.0 format, verified with PACT's official conformance testing tool (November 2026)</span></li>
         </ul>
         <p style="margin-top:18px;font-size:14px;color:var(--dim)">The agent is available to design partners. <a href="#contact" style="color:var(--teal)">Talk to us →</a></p>
       </div>
