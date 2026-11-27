@@ -52,7 +52,7 @@
       "email": "sales@eco360.ai",
       "address": { "@type": "PostalAddress", "streetAddress": "Hovinrinne 13", "postalCode": "37470", "addressLocality": "Vesilahti", "addressCountry": "FI" },
       "founder": [{ "@id": "https://eco360.ai/about#jyri-roselius" }, { "@id": "https://eco360.ai/about#kari-ketola" }],
-      "sameAs": ["https://www.linkedin.com/company/eco360-ltd/"]
+      "sameAs": ["https://www.linkedin.com/company/eco360-ltd/", "https://www.carbon-transparency.org/solutions/eco360-platform"]
     },
     {
       "@type": "WebSite",
@@ -440,6 +440,7 @@ footer img{height:26px;margin-bottom:16px;opacity:.9}
 footer h3{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim);margin-bottom:14px}
 footer ul{list-style:none;display:flex;flex-direction:column;gap:9px}
 footer a:hover{color:var(--white)}
+footer .profiles{margin-top:32px}
 footer .legal{margin-top:44px;padding-top:24px;border-top:1px solid rgba(255,255,255,.05);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 @media(max-width:900px){footer .cols{grid-template-columns:1fr 1fr}}
 
@@ -1008,8 +1009,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
           <li>Tier, source and uncertainty on every field; substantiation URL in every comparative response</li>
           <li>Public per-product page and embeddable widget — a data disclosure, not a green stamp; GS1 Digital Link, EN-aligned DPP payload</li>
           <li>Agent: natural-language queries, and alerts when the data moves underneath you — a retired factor, a superseded substance list, a lost EPREL match</li>
-          <!-- TODO: PACT confirmed Eco360's conformant status on 18.11.2026. Once PACT lists Eco360 on carbon-transparency.org (expected end of week of 18.11.2026), link the badge to that listing page. Until then the badge has no link. -->
-          <li class="pact"><img src="/badges/pact-conformant.png" width="96" height="101" alt="PACT conformant — Partnership for Carbon Transparency" loading="lazy"><span>PACT Conformant — product footprints exchanged in the WBCSD PACT Technical Specifications V3.0 format, verified with PACT's official conformance testing tool (November 2026)</span></li>
+          <li class="pact"><a href="https://www.carbon-transparency.org/solutions/eco360-platform" rel="noopener" aria-label="ECO360 in the PACT conformant solutions catalog"><img src="/badges/pact-conformant.png" width="96" height="101" alt="PACT conformant — Partnership for Carbon Transparency" loading="lazy"></a><span>PACT Conformant — product footprints exchanged in the WBCSD PACT Technical Specifications V3.0 format, verified with PACT's official conformance testing tool (November 2026)</span></li>
         </ul>
         <p style="margin-top:18px;font-size:14px;color:var(--dim)">The agent is available to design partners. <a href="#contact" style="color:var(--teal)">Talk to us →</a></p>
       </div>
@@ -1275,6 +1275,7 @@ body::after{content:"";position:fixed;inset:0;z-index:0;pointer-events:none;
         <ul><li><a href="/privacy">Privacy</a></li><li><a href="/terms">Terms</a></li><li><a href="/claim-methodology">Claim methodology</a></li></ul>
       </div>
     </div>
+    <p class="profiles"><a href="https://www.linkedin.com/company/eco360-ltd/" rel="noopener">LinkedIn</a> · <a href="https://www.carbon-transparency.org/solutions/eco360-platform" rel="noopener">PACT catalog</a></p>
     <div class="legal">
       <span>© 2026 Eco360 Ltd · Business ID 3482010-3 · VAT FI34820103 · Hovinrinne 13, 37470 Vesilahti · Finland</span>
       <span>Every figure on this site carries its source — or a comment marking it for verification before publication.</span>
