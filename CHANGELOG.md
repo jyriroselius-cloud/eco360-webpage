@@ -1,5 +1,11 @@
 # Changelog — eco360-webpage
 
+## [2.1.12] — 2026-11-27
+
+### Hero CTA order
+
+- Hero secondary links reordered: Book a demo · Send us a file · Look up a device (elements moved as they were; text, targets, classes unchanged). DOM order = visual order = keyboard tab order
+
 ## [2.1.11] — 2026-11-27
 
 ### Hero eyebrow
