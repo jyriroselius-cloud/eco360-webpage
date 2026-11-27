@@ -84,8 +84,8 @@ describe('HTML structure', () => {
     const graph = JSON.parse(match[1]);
     const org = graph['@graph'].find(n => n['@type'] === 'Organization');
     expect(org).toBeDefined();
-    // Company identity: Eco360 Ltd (Eco360 Oy), business ID 3482010-3 — Jyri 2026-10-19, supersedes Decisions.md 2026-09-06.
-    expect(org.legalName).toBe('Eco360 Ltd');
+    // Company identity: Eco360 Oy (English form Eco360 Ltd), business ID 3482010-3 — Jyri 2026-10-19, supersedes Decisions.md 2026-09-06.
+    expect(org.legalName).toBe('Eco360 Oy');
     expect(org.vatID).toBe('FI34820103');
     expect(org.identifier).toMatchObject({ '@type': 'PropertyValue', propertyID: 'FI-business-id', value: '3482010-3' });
     expect(org.sameAs).toContain('https://www.linkedin.com/company/eco360-ltd/');
