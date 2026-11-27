@@ -1,5 +1,14 @@
 # Changelog — eco360-webpage
 
+## [2.1.9] — 2026-11-27
+
+### Vercel build runs the offline tests
+
+- `vercel.json`: `buildCommand` `npm run test:build`, `installCommand` `npm ci`, `outputDirectory` `public`; all other settings unchanged; served files unchanged (no build step)
+- `package.json`: `test:build` (everything except the two live-fetch tests), `test:live` (`headers` + `redirects` against production); `test` unchanged
+- `tests/vercel-config.test.js`: offline checks of the security headers and all 13 redirects in `vercel.json`, same expected values as the live tests
+- `CLAUDE.md`: gate rule and post-push `test:live` run
+
 ## [2.1.8] — 2026-11-27
 
 ### Organization JSON-LD: legal name
