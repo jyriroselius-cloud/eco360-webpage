@@ -1,5 +1,12 @@
 # Changelog — eco360-webpage
 
+## [2.1.8] — 2026-11-27
+
+### Organization JSON-LD: legal name
+
+- `index.html` Organization: `legalName` is now "Eco360 Oy" and `alternateName` "Eco360 Ltd" (Oy is the legal name, Ltd its registered English form); nothing else changed
+- EcoGreen360 guard tests unchanged
+
 ## [2.1.7] — 2026-11-27
 
 ### External profile links
