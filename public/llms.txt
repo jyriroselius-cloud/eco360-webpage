@@ -4,6 +4,9 @@
 > substance screening and digital product passports. Every figure carries a
 > confidence tier. Operated by Eco360 Ltd, Finland.
 
+## Audience
+Manufacturing subcontractors and contract manufacturers supplying EU automotive and electronics buyers: part-level IMDS, REACH, RoHS and PCF data.
+
 ## What ECO360 does
 - Product carbon footprints at model level, with the calculation tier stated
 - Bill-of-materials screening for PFAS, REACH SVHC and RoHS (TSCA and Prop 65 in scope; not_applicable for EEA-market products)

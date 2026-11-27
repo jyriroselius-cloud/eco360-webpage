@@ -1,5 +1,13 @@
 # Changelog — eco360-webpage
 
+## [2.1.10] — 2026-11-27
+
+### Names who it is for
+
+- Hero lede: new line after "ECO360 is the compliance and carbon data layer for physical products." naming manufacturing subcontractors and contract manufacturers with EU automotive and electronics customers (IMDS, REACH, RoHS, PCF) — Jyri confirmed IMDS and part-level PCF are supported (27.11.2026)
+- "Built for electronics" framing replaced by "Built for manufacturers and their suppliers" in the hero note, meta description, twitter:description, footer and `about.html` meta description
+- `llms.txt`: "Audience" section; no customer names; JSON-LD unchanged
+
 ## [2.1.9] — 2026-11-27
 
 ### Vercel build runs the offline tests
