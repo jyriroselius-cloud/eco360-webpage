@@ -1,5 +1,15 @@
 # Changelog — eco360-webpage
 
+## [2.1.7] — 2026-11-27
+
+### External profile links
+
+- PACT badge in #platform links to the PACT catalog listing (`carbon-transparency.org/solutions/eco360-platform`, HTTP 200 verified); TODO comment removed; badge image unchanged
+- Footer: text links row (LinkedIn, PACT catalog)
+- Organization JSON-LD `sameAs`: PACT listing added next to the existing LinkedIn URL
+- `llms.txt`: "Profiles" line with both URLs
+- Wording unchanged ("PACT Conformant")
+
 ## [2.1.6] — 2026-11-18
 
 ### Supplier declaration formats in #bom
