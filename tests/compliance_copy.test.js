@@ -22,12 +22,7 @@ const NOT_APPLICABLE_EEA = ['TSCA', 'Prop 65'];
 // These are not in ALL_THEMES (which covers substance screening only).
 const EU_FRAMEWORKS = ['SCIP', 'WEEE'];
 
-// Bare "REACH" is allowed only as the name of what buyers demand in the hero audience line
-// (approved by Jyri 27.11.2026: "IMDS, REACH, RoHS and PCF"). What the engine assesses stays
-// "REACH SVHC" (ASSESSED); no regulatory-clearance claim is made (see claim-methodology).
-const BUYER_DEMAND_TERMS = ['REACH'];
-
-const APPROVED = new Set([...ASSESSED, ...NOT_APPLICABLE_EEA, ...EU_FRAMEWORKS, ...BUYER_DEMAND_TERMS]);
+const APPROVED = new Set([...ASSESSED, ...NOT_APPLICABLE_EEA, ...EU_FRAMEWORKS]);
 
 // Ordered longest-first so compound names ("UK REACH", "REACH SVHC") match before their substrings.
 // Bare "SVHC" is omitted — it is shorthand for "REACH SVHC" and safe to use as an abbreviation.

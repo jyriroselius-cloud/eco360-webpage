@@ -4,7 +4,7 @@
 
 ### Names who it is for
 
-- Hero lede: new line after "ECO360 is the compliance and carbon data layer for physical products." naming manufacturing subcontractors and contract manufacturers with EU automotive and electronics customers (IMDS, REACH, RoHS, PCF) — Jyri confirmed IMDS and part-level PCF are supported (27.11.2026)
+- Hero lede: new line after "ECO360 is the compliance and carbon data layer for physical products." for subcontractors supplying EU automotive and electronics OEMs (part-level IMDS, REACH SVHC, RoHS, PCF); lede max-width 60ch; meta/og/twitter descriptions unified (≤160 chars) — Jyri confirmed IMDS and part-level PCF are supported (27.11.2026)
 - "Built for electronics" framing replaced by "Built for manufacturers and their suppliers" in the hero note, meta description, twitter:description, footer and `about.html` meta description
 - `llms.txt`: "Audience" section; no customer names; JSON-LD unchanged
 

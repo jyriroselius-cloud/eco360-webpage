@@ -5,7 +5,7 @@
 > confidence tier. Operated by Eco360 Ltd, Finland.
 
 ## Audience
-Manufacturing subcontractors and contract manufacturers supplying EU automotive and electronics buyers: part-level IMDS, REACH, RoHS and PCF data.
+Manufacturing subcontractors and contract manufacturers supplying EU automotive and electronics buyers: part-level IMDS, REACH SVHC, RoHS and PCF data.
 
 ## What ECO360 does
 - Product carbon footprints at model level, with the calculation tier stated
