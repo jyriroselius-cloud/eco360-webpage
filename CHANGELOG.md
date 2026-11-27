@@ -1,5 +1,12 @@
 # Changelog — eco360-webpage
 
+## [2.1.11] — 2026-11-27
+
+### Hero eyebrow
+
+- Hero eyebrow label: "Compliance and carbon data for manufacturing supply chains" replaces "The AI platform for the circular electronics economy" (markup and styling unchanged)
+- Old phrase appears nowhere else in `public/` or `llms.txt`
+
 ## [2.1.10] — 2026-11-27
 
 ### Names who it is for
