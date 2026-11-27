@@ -3,6 +3,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest run",
+    "test:build": "vitest run --exclude tests/headers.test.js --exclude tests/redirects.test.js",
+    "test:live": "vitest run tests/headers.test.js tests/redirects.test.js",
     "test:watch": "vitest"
   },
   "devDependencies": {

@@ -1,4 +1,7 @@
 {
+  "buildCommand": "npm run test:build",
+  "installCommand": "npm ci",
+  "outputDirectory": "public",
   "cleanUrls": true,
   "trailingSlash": false,
   "headers": [
